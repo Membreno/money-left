@@ -29,7 +29,7 @@
   width: 100%;
   text-align: center; }
 
-#monthly-expenses table {
+#monthly__expenses table {
   text-align: center;
   overflow-y: scroll; }
 
@@ -37,5 +37,8 @@
   display: flex;
   justify-content: space-evenly;
   margin: 2rem; }
+
+#navbar {
+  background: linear-gradient(to bottom right, #33b75c, #018910); }
 
 /*# sourceMappingURL=app.css.map */
