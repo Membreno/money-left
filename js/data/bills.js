@@ -16,4 +16,10 @@ export const bills = [{
     "date": "5th",
     "amount": "$100.00"
   },
+  {
+    "id": "4",
+    "name": "PG&E",
+    "date": "11th",
+    "amount": "$80.00"
+  },
 ]
