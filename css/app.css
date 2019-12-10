@@ -60,10 +60,16 @@
 tr {
   border: none; }
 
+.filter-triggers {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 100%; }
+
 .update {
   margin-top: 1rem;
   border: 1px solid black;
-  width: 65%; }
+  width: 65%;
+  margin: 0 auto; }
 
 .update-info {
   margin-left: 3%;
@@ -73,7 +79,8 @@ tr {
   height: 20%; }
 
 .update-dollars {
-  justify-content: space-between; }
+  width: 95%;
+  padding: 1.5%; }
 
 .update-date {
   background: #292C34;
@@ -86,10 +93,13 @@ tr {
 
 .update-amount {
   color: #8a8989;
-  font-size: 0.8rem; }
+  font-size: 0.8rem;
+  display: inline-block; }
 
-.update-dollars-spent {
+.update-spent {
   color: #aa0000;
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  display: inline-block;
+  margin-left: 52%; }
 
 /*# sourceMappingURL=app.css.map */
