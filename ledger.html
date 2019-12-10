@@ -26,7 +26,37 @@
   </nav>
 
   <div class="container">
-    <h1>Ledger</h1>
+    <div class="filter-triggers">
+      <button class="btn shadow btn-outline-primary">WEEK</button>
+      <button class="btn shadow btn-outline-dark">MONTH</button>
+      <button class="btn shadow btn-outline-dark">3 MONTHS</button>
+      <button class="btn shadow btn-outline-warning">ALL</button>
+    </div>
+    <!-- <div class="update">
+      <p class="update-date">Nov 20, 2019</p>
+      <div class="update-info">
+        <p class="update-title">Target</p>
+        <p class="update-new-amount">$ 1,000.00</p>
+        <p class="update-dollars-spent">-$54.70</p>
+      </div>
+    </div> -->
+
+
+    <table class="table table-striped table-dark update">
+        <thead>
+          <tr>
+            <th scope="col" class="update-date">NOV 20, 2019</th>
+          </tr>
+        </thead>
+        <tbody class="update-info">
+          <td class="update-title">Target</td>
+            <tr>
+              <td class="update-amount">$1,000.00</td>
+              <td class="update-dollars-spent">-$54.70</td>
+            </tr>
+        </tbody>
+      </table>
+
   </div>
 
   <script src="js/app.js" type="module"></script>

@@ -1,12 +1,20 @@
 /* PLUGINS */
 /* BASE STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+#addbill {
+  width: 100%; }
+
+#addbill__link {
+  display: flex;
+  justify-content: flex-end; }
+
 /* LAYOUTS */
 .container {
   margin-top: 2rem; }
-
-#add-bill__link {
-  display: flex;
-  justify-content: right; }
 
 /* MODULES */
 .track-bar {
@@ -48,5 +56,29 @@
 
 #navbar {
   background: linear-gradient(to bottom right, #33b75c, #018910); }
+
+.update {
+  margin-top: 1rem;
+  border: 1px solid black; }
+
+.update-info {
+  margin-left: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 20%; }
+
+.update-date {
+  background: #292C34;
+  color: #74C5BF;
+  padding: 0.3rem; }
+
+.update-title {
+  font-size: 1.3rem;
+  width: 100%; }
+
+.update-amount {
+  color: #8a8989;
+  font-size: 0.8rem; }
 
 /*# sourceMappingURL=app.css.map */
