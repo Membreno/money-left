@@ -57,9 +57,13 @@
 #navbar {
   background: linear-gradient(to bottom right, #33b75c, #018910); }
 
+tr {
+  border: none; }
+
 .update {
   margin-top: 1rem;
-  border: 1px solid black; }
+  border: 1px solid black;
+  width: 65%; }
 
 .update-info {
   margin-left: 3%;
@@ -67,6 +71,9 @@
   flex-wrap: wrap;
   flex-direction: column;
   height: 20%; }
+
+.update-dollars {
+  justify-content: space-between; }
 
 .update-date {
   background: #292C34;
@@ -80,5 +87,9 @@
 .update-amount {
   color: #8a8989;
   font-size: 0.8rem; }
+
+.update-dollars-spent {
+  color: #aa0000;
+  font-size: 1.2rem; }
 
 /*# sourceMappingURL=app.css.map */
