@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Money Left</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/app.css">
 </head>
 <body>
@@ -30,8 +31,9 @@
       <h4 class="total-funds__amount">$1000.00</h4>
     </div>
     <div class="modify-funds">
-      <button class="btn btn-success shadow border border-dark" data-toggle="modal" data-target="#addIncome__trigger">Add Income</button>
-      <button class="btn btn-danger shadow border border-dark" data-toggle="modal" data-target="#addExpense__trigger">Deduct Expense</button>
+      <button class="btn btn-success shadow border border-dark" data-toggle="modal"
+        data-target="#addIncome__trigger"><i class="fa fa-money" aria-hidden></i> Add Income</button>
+      <button class="btn btn-danger shadow border border-dark" data-toggle="modal" data-target="#addExpense__trigger">Deduct Expense <i class="fa fa-bar-chart" aria-hidden="true"></i></button>
     </div>
     <!-- Modal Income-->
     <div class="modal fade" id="addIncome__trigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
