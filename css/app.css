@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap");
 /* PLUGINS */
 /* BASE STYLES */
 * {
@@ -11,6 +12,14 @@
 #addbill__link {
   display: flex;
   justify-content: flex-end; }
+
+.require {
+  color: #aa0000; }
+
+.title {
+  font-family: "Lakki Reddy", cursive;
+  text-align: center;
+  color: #0075AA; }
 
 /* LAYOUTS */
 .container {

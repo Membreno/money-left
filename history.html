@@ -26,32 +26,37 @@
   </nav>
 
   <div class="container">
-    <h1>Budgets</h1>
-    <button class="btn btn-primary">Add New Budget</button>
-    <div class="add-budget__form">
-      <form action="" method="post">
-        <div class="form-group">
-          <label for="name">Budget Name</label>
-          <input type="text" name="name">
-        </div>
-        <div class="form-group">
-          <label for="amount">Budget Total</label>
-          <input type="text" name="amount">
-        </div>
-        <div class="form-group">
-          <label for="frequency">Frequency</label>
-          <select name="frequency">
-            <option value="montly">Monthly</option>
-            <option value="bi-weekly">Bi-Weekly</option>
-            <option value="weekly">Weekly</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="name">Start Date</label>
-          <input type="date" name="start">
-        </div>
-      </form>
+    <div class="filter-triggers text-center">
+      <button class="btn shadow btn-outline-primary">WEEK</button>
+      <button class="btn shadow btn-outline-dark">MONTH</button>
+      <button class="btn shadow btn-outline-dark">3 MONTHS</button>
+      <button class="btn shadow btn-outline-warning">ALL</button>
     </div>
+    <!-- <div class="update">
+      <p class="update-date">Nov 20, 2019</p>
+      <div class="update-info">
+        <p class="update-title">Target</p>
+        <p class="update-new-amount">$ 1,000.00</p>
+        <p class="update-dollars-spent">-$54.70</p>
+      </div>
+    </div> -->
+
+
+    <table class="update">
+        <thead>
+          <tr>
+            <th scope="col" class="update-date">NOV 20, 2019</th>
+          </tr>
+        </thead>
+        <tbody class="update-info">
+          <td class="update-title">Target</td>
+            <tr class="update-dollars">
+              <td class="update-amount">$1,000.00</td>
+              <td class="update-spent text-right">-$54.70</td>
+            </tr>
+        </tbody>
+      </table>
+
   </div>
 
   <script src="js/app.js" type="module"></script>

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Money Left</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/app.css">
 </head>
 <body>
@@ -26,32 +27,18 @@
   </nav>
 
   <div class="container">
-    <h1>Budgets</h1>
-    <button class="btn btn-primary">Add New Budget</button>
-    <div class="add-budget__form">
-      <form action="" method="post">
-        <div class="form-group">
-          <label for="name">Budget Name</label>
-          <input type="text" name="name">
-        </div>
-        <div class="form-group">
-          <label for="amount">Budget Total</label>
-          <input type="text" name="amount">
-        </div>
-        <div class="form-group">
-          <label for="frequency">Frequency</label>
-          <select name="frequency">
-            <option value="montly">Monthly</option>
-            <option value="bi-weekly">Bi-Weekly</option>
-            <option value="weekly">Weekly</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="name">Start Date</label>
-          <input type="date" name="start">
-        </div>
-      </form>
-    </div>
+    <h1 class="title">SIGN IN</h1>
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1"><span class="require">*</span> Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1"><span class="require">*</span> Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="************">
+      </div>
+      <button type="submit" class="d-block mx-auto btn btn-primary shadow border"><i class="fa fa-lock" aria-hidden></i> Sign In</button>
+    </form>
   </div>
 
   <script src="js/app.js" type="module"></script>
