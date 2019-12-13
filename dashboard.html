@@ -21,7 +21,8 @@
         <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="dashboard.html">Dashboard</a>
         <a class="nav-item nav-link" href="history.html">History</a>
-        <a class="nav-item nav-link" href="budgets.html">Budgets</a>
+        <a class="nav-item nav-link" href="settings.html">Settings</a>
+        <a class="nav-item nav-link disabled" href="/logout">Log Out</a>
       </div>
     </div>
   </nav>
@@ -103,9 +104,32 @@
         </div>
       </div>
     </div>
+    <!-- Modal ADD BILL-->
+    <div class="add-bill-modal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h5 class="modal__title">JabJabJavascript</h5>
+        <button type="button" class="close-exit">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal__body">
+        <h3>Get weekly awesome tutorials straight to your inbox.</h3>
+        <p>No BS. Only quality goodies.</p>
+        <form class="form" action="/" method="">
+          <label for="email">Email:
+            <input class="form__email" type="email" placeholder="Your email...">
+          </label>
+          <label for="submit">
+            <input class="form__submit" type="submit" value="Join">
+          </label>
+        </form>
+      </div>
+    </div>
+  </div>
     <!-- Modals END -->
     <div class="addbill">
-      <a href="#" id="addbill__link">Add New Bill</a>
+      <a href="#" id="addbill__link" class="trigger">Add New Bill</a>
     </div>
     <div class="track-bar">
       <div class="track-bar__fill"></div>
