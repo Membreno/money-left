@@ -108,22 +108,28 @@
     <div class="add-bill-modal">
     <div class="modal__content">
       <div class="modal__header">
-        <h5 class="modal__title">JabJabJavascript</h5>
+        <h2 class="modal__title">JabJabJavascript</h2>
         <button type="button" class="close-exit">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal__body">
-        <h3>Get weekly awesome tutorials straight to your inbox.</h3>
-        <p>No BS. Only quality goodies.</p>
-        <form class="form" action="/" method="">
-          <label for="email">Email:
-            <input class="form__email" type="email" placeholder="Your email...">
-          </label>
-          <label for="submit">
-            <input class="form__submit" type="submit" value="Join">
-          </label>
-        </form>
+        <div class="modal-body">
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="name">Expense Name</label>
+              <input type="text" name="name" class="col-sm-12" placeholder="Coffe, Lunch, Etc.">
+            </div>
+            <div class="form-group">
+              <label for="amount">Total Amount Paid</label>
+              <input type="number" name="amount" class="col-sm-12" min="0.01" step="0.01" placeholder="$0.00">
+            </div>
+            <div class="form-group">
+              <label for="name">Date of Expense</label>
+              <input type="date" name="start">
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

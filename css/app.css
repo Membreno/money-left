@@ -127,7 +127,7 @@ tr {
   padding-top: 0px; }
 
 .modal__content {
-  background: #2C3344;
+  background: linear-gradient(to bottom right, #018910, #0075AA);
   width: 80%;
   max-width: 640px;
   margin: 3rem auto;
