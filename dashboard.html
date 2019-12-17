@@ -106,45 +106,46 @@
     </div>
     <!-- Modal ADD BILL-->
     <div class="add-bill-modal">
-    <div class="modal__content">
-      <div class="modal__header">
-        <h2 class="modal__title">ADD NEW BILL</h2>
-        <button type="button" class="close-exit">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal__body">
-        <div class="modal-body">
-          <form action="" method="post">
-            <div class="form-group">
-              <label for="name">Name Of Bill</label>
-              <input type="text" name="name" class="col-sm-12 form-control">
-            </div>
-            <div class="form-group">
-              <label for="amount">Amount Due</label>
-              <input type="number" name="amount" class="col-sm-12 form-control" min="0.01" step="0.01"
-                placeholder="$0.00">
-            </div>
-            <div class="form-group">
-              <label for="name">Next Billing Date</label>
-              <input type="date" name="start" class="d-block m-auto">
-            </div>
-            <div class="form-group">
-              <label for="repeats" class="m-0">Repeats</label>
-              <input type="checkbox" name="repeats">
-              <p class="m-0">Is this a reoccurring bill?</p>
-            </div>
-            <div class="form-group">
-              <label for="repeats-forever" class="m-0">Repeats Forever</label>
-              <input type="checkbox" name="repeats">
-              <p class="m-0">Does this bill have a set end date?</p>
-            </div>
-            <input type="submit" value="ADD BILL" class="btn btn-info border border-dark">
-          </form>
+      <div class="modal__content">
+        <div class="modal__header">
+          <h2 class="modal__title">ADD NEW BILL</h2>
+          <button type="button" class="close-exit">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal__body">
+          <div class="modal-body">
+            <form action="" method="post">
+              <div class="form-group">
+                <label for="name">Name Of Bill</label>
+                <input type="text" name="name" class="col-sm-12 form-control">
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount Due</label>
+                <input type="number" name="amount" class="col-sm-12 form-control" min="0.01" step="0.01"
+                  placeholder="$0.00">
+              </div>
+              <div class="form-group">
+                <label for="name">Next Billing Date</label>
+                <input type="date" name="start" class="d-block m-auto">
+              </div>
+              <div class="form-group">
+                <p class="m-0">Is this a reoccurring bill?</p>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="repeats" id="reprepeats-true" value="true" checked="checked">
+                  <label class="form-check-label" for="reprepeats-true">YES</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="repeats" id="reprepeats-false" value="false">
+                  <label class="form-check-label" for="reprepeats-false">NO</label>
+                </div>
+              </div>
+              <input type="submit" value="ADD BILL" class="btn btn-info border border-dark">
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <!-- Modals END -->
     <div class="addbill">
       <a href="#" id="addbill__link" class="trigger">Add New Bill</a>
