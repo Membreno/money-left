@@ -9,6 +9,21 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   res.render('index')
 })
+app.get('/ml/dashboard', (req, res) => {
+  res.render('dashboard')
+})
+app.get('/ml/history', (req, res) => {
+  res.render('history')
+})
+app.get('/ml/settings', (req, res) => {
+  res.render('settings')
+})
+app.get('/login', (req, res) => {
+  res.render('signin')
+})
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
 
 
 const PORT = process.env.PORT || 5000;
