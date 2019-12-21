@@ -14,19 +14,13 @@
   "author": "Pedro M.",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.2.4",
     "express": "^4.17.1",
-    "express-validator": "^6.3.0",
-    "gravatar": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.16.2",
     "mongoose": "^5.7.12",
-    "request": "^2.88.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
-    "ejs": "^2.6.2",
-    "express-flash": "0.0.2",
-    "express-session": "^1.16.2"
+    "ejs": "^2.6.2"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",

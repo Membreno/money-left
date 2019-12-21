@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 
-mongoose.connect('mongodb://localhost/money_left', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/money_left', {
+   useUnifiedTopology: true,
+   useNewUrlParser: true,
+   useCreateIndex: true
+});
 mongoose.Promise = global.Promise;
 // Connecting out models to mongoose
 let models_path = path.join(__dirname, '../models');
