@@ -6,5 +6,8 @@ module.exports = { // We export so methods can be accessed in our routes
   },
   signup: function (req, res) {
     res.render('signup')
-  }
+  },
+  login: function (req, res) {
+    res.render('signin')
+  },
 }

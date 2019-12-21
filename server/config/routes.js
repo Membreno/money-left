@@ -8,6 +8,9 @@ module.exports = function (app) { // By declaring as a function we can access ea
   app.get('/signup', function (req, res) {
     base.signup(req, res);
   });
+  app.get('/login', function (req, res) {
+    base.login(req, res);
+  });
   // app.all("*", (req, res, next) => {
   //   res.sendFile(path.resolve("./public/dist/public/index.html"))
   // });
@@ -16,9 +19,6 @@ module.exports = function (app) { // By declaring as a function we can access ea
 
 
 // Routes
-// app.get('/', (req, res) => {
-//   res.render('index')
-// })
 // app.get('/ml/dashboard', (req, res) => {
 //   res.render('dashboard')
 // })
@@ -27,10 +27,4 @@ module.exports = function (app) { // By declaring as a function we can access ea
 // })
 // app.get('/ml/settings', (req, res) => {
 //   res.render('settings')
-// })
-// app.get('/login', (req, res) => {
-//   res.render('signin')
-// })
-// app.get('/signup', (req, res) => {
-//   res.render('signup')
 // })
