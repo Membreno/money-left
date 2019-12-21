@@ -1,5 +1,6 @@
 const path = require('path');
 const base = require('../controllers/base.js'); // Used to access the methods within controller
+const authorize = require('../controllers/authorize.js');
 
 module.exports = function (app) { // By declaring as a function we can access each route individually
   app.get('/', function (req, res) {
@@ -11,6 +12,9 @@ module.exports = function (app) { // By declaring as a function we can access ea
   app.get('/login', function (req, res) {
     base.login(req, res);
   });
+  app.post('/signup', function(req, res) {
+    authorize.register(req, res);
+  })
   // app.all("*", (req, res, next) => {
   //   res.sendFile(path.resolve("./public/dist/public/index.html"))
   // });
