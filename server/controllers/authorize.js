@@ -8,11 +8,11 @@ const User = mongoose.model('User');
 module.exports = { // We export so methods can be accessed in our routes
   register: function (req, res) {
     if(!EMAIL_REGEX.test(req.body.email)){
-      req.flash('registration', "Email must be valid");
+      req.flash('email', "Email must be valid");
     }
     else if (req.body.password != req.body.confirm){
-      req.flash('registration', "Password must match");
-      return res.redirect('/')
+      req.flash('reg_password', "Password must match");
+      // return res.redirect('/signup')
     }
     let hash = bcrypt.hashSync(req.body.password, 10);
     // console.log("Hashed Password ", hash);
@@ -24,15 +24,15 @@ module.exports = { // We export so methods can be accessed in our routes
     });
     user.save(function(err){
       if(err){
-        console.log("MADE IT TO SAVE \n" + err);
-        // for (let key in err.errors) {
-        //   console.log(message)
-        //   // req.flash('registration', err.errors[key].message)
-        // }
-        res.redirect('/');
+        console.log("MADE IT TO SAVE w/ error\n" + err);
+        for (let key in err.errors) {
+          req.flash(key, err.errors[key].message)
+        }
+        res.redirect('/signup');
       } else {
         console.log("Successfully added user!");
         console.log(user);
+        res.redirect('/')
       }
     })
   },

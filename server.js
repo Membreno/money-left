@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 const flash = require('express-flash');
 const session = require('express-session');
 const app = express();
+require('dotenv/config');
 
 
 app.use(flash());
@@ -12,7 +13,7 @@ app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(session({
-  secret: 'keyboardkitteh',
+  secret: process.env.SECRET_SESSION,
   resave: false,
   saveUninitialized: true,
   cookie: {
