@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Money Left</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/flatly/bootstrap.min.css">
   <link rel="stylesheet" href="../css/app.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
     </div>
   </nav>
 
-  <div class="container">
+  <!-- <div class="container">
     <h1 class="title">CREATE AN ACCOUNT</h1>
 
     <form action="/signup" method="post">
@@ -49,10 +49,51 @@
         <label for="confirm"><span class="require">*</span> Confirm Password</label>
         <input type="password" class="form-control" name="confirm" placeholder="************">
       </div>
-      <button type="submit" class="d-block mx-auto btn btn-primary shadow border"><i class="fa fa-lock" aria-hidden></i>
-        Create
-        Account</button>
+      <button type="submit" class="d-block mx-auto btn btn-primary shadow border">
+        <i class="fa fa-lock" aria-hidden></i> CreateAccount
+      </button>
     </form>
+  </div> -->
+
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 m-auto">
+        <div class="card card-body">
+          <h1 class="text-center mb-3">
+            <i class="fas fa-user-plus"></i> Register
+          </h1>
+
+          <form action="/users/register" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name"
+                value="<%= typeof name != 'undefined' ? name : '' %>" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+                value="<%= typeof email != 'undefined' ? email : '' %>" />
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Create Password"
+                value="<%= typeof password != 'undefined' ? password : '' %>" />
+              <small id="emailHelp" class="form-text text-muted">Minimum of 6 characters.</small>
+            </div>
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password"
+                value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Register
+            </button>
+          </form>
+          <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="../js/app.js" type="module"></script>

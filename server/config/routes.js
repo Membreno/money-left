@@ -6,15 +6,15 @@ module.exports = function (app) { // By declaring as a function we can access ea
   app.get('/', function (req, res) {
     base.home(req, res);
   });
-  app.get('/signup', function (req, res) {
-    base.signup(req, res);
+  app.get('/register', function (req, res) {
+    base.register(req, res);
   });
+  app.post('/register', function (req, res) {
+    authorize.register(req, res);
+  })
   app.get('/login', function (req, res) {
     base.login(req, res);
   });
-  app.post('/signup', function(req, res) {
-    authorize.register(req, res);
-  })
   // app.all("*", (req, res, next) => {
   //   res.sendFile(path.resolve("./public/dist/public/index.html"))
   // });
