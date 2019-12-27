@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-// const flash = require('express-flash');
+const flash = require('express-flash');
 const User = mongoose.model('User');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -93,36 +93,5 @@ module.exports = { // We export so methods can be accessed in our routes
         })
     }
   },
-
-  // register: function (req, res) {
-  //   if(!EMAIL_REGEX.test(req.body.email)){
-  //     req.flash('email', "Email must be valid");
-  //   }
-  //   else if (req.body.password != req.body.confirm){
-  //     req.flash('reg_password', "Password must match");
-  //     // return res.redirect('/signup')
-  //   }
-  //   let hash = bcrypt.hashSync(req.body.password, 10);
-  //   // console.log("Hashed Password ", hash);
-  //   // console.log(bcrypt.compareSync(req.body.password, hash) );
-  //   const user = new User({
-  //     name: req.body.name,
-  //     email: req.body.email,
-  //     password: hash
-  //   });
-  //   user.save(function(err){
-  //     if(err){
-  //       console.log("MADE IT TO SAVE w/ error\n" + err);
-  //       for (let key in err.errors) {
-  //         req.flash(key, err.errors[key].message)
-  //       }
-  //       res.redirect('/signup');
-  //     } else {
-  //       console.log("Successfully added user!");
-  //       console.log(user);
-  //       res.redirect('/')
-  //     }
-  //   })
-  // },
 
 }

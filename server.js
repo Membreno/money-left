@@ -29,6 +29,14 @@ app.use(session({
 // Connect Flash
 app.use(flash());
 
+// Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+})
+
 require('./server/config/mongoose.js');
 require('./server/config/routes.js')(app); // Passing the app as a input for our routes function
 
