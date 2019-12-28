@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const flash = require('express-flash');
 const User = mongoose.model('User');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const passport = require('passport');
 
 module.exports = { // We export so methods can be accessed in our routes
   register: (req, res) => {
@@ -93,5 +94,12 @@ module.exports = { // We export so methods can be accessed in our routes
         })
     }
   },
+  login: (req, res, next) => {
+    passport.authenticate('local', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/login',
+      failureFlash: true
+    })(req, res, next);
+  }
 
 }

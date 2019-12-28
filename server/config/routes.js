@@ -15,6 +15,9 @@ module.exports = function (app) { // By declaring as a function we can access ea
   app.get('/login', function (req, res) {
     base.login(req, res);
   });
+  app.post('/login', function (req, res) {
+    authorize.login(req, res);
+  })
   // app.all("*", (req, res, next) => {
   //   res.sendFile(path.resolve("./public/dist/public/index.html"))
   // });
