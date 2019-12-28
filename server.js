@@ -8,13 +8,15 @@ const passport = require('passport');
 const app = express();
 require('dotenv/config');
 
-
-app.use(express.static(__dirname + '/static'));
-// app.set('views', __dirname + '/views');
+// Passport config
+require('./server/config/passport')(passport);
 
 // EJS
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
+
+// EJS Static
+app.use(express.static(__dirname + '/static'));
 
 // Bodyparser
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +27,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }))
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect Flash
 app.use(flash());
@@ -37,6 +43,7 @@ app.use((req, res, next) => {
   next();
 })
 
+// Routes & Mongoose config
 require('./server/config/mongoose.js');
 require('./server/config/routes.js')(app); // Passing the app as a input for our routes function
 
