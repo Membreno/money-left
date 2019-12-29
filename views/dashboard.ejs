@@ -28,35 +28,6 @@
   <div class="modal fade" id="addIncome__trigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <!-- <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-success" id="exampleModalLabel">Add Income</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="" method="post">
-            <div class="form-group">
-              <label for="name">Resource Name</label>
-              <input type="text" name="name" class="col-sm-12" placeholder="Paycheck, Billables Received, Etc.">
-            </div>
-            <div class="form-group">
-              <label for="amount">Total Amount Received</label>
-              <input type="number" name="amount" class="col-sm-12"  min="0.01" step="0.01" placeholder="$0.00">
-            </div>
-            <div class="form-group">
-              <label for="name">Date Received</label>
-              <input type="date" name="start">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Add Income</button>
-        </div>
-      </div> -->
-
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="text-success">Add Income <i class="fas fa-hand-holding-usd"></i></h2>
@@ -68,24 +39,23 @@
           <form action="/income" method="POST">
             <div class="form-group">
               <label for="amount">Total</label>
-              <input type="number" id="amount" name="amount" class="form-control" min="0.01" step="0.01"
+              <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
                 placeholder="$ 0.00">
             </div>
             <div class="form-group">
               <label for="name">From</label>
-              <input type="name" id="name" name="name" class="form-control" placeholder="Resource Name" />
+              <input type="name" name="name" class="form-control" placeholder="Enter Resource Name" />
             </div>
             <div class="form-group">
-              <label for="date">Date Received</label>
-              <input type="date" id="date" name="date" class="form-control">
+              <label for="date">Date</label>
+              <input type="date" name="date" class="form-control">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Add Income</button>
+              <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success shadow">Add Income</button>
             </div>
           </form>
         </div>
-        
       </div>
     </div>
   </div>
@@ -95,30 +65,31 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-danger" id="exampleModalLabel">Deduct Expense</h5>
+          <h2 class="text-danger">Deduct Expense <i class="fas fa-file-invoice-dollar"></i></h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="/income" method="POST">
             <div class="form-group">
-              <label for="name">Expense Name</label>
-              <input type="text" name="name" class="col-sm-12" placeholder="Coffe, Lunch, Etc.">
+              <label for="amount">Total</label>
+              <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
+                placeholder="$ 0.00">
             </div>
             <div class="form-group">
-              <label for="amount">Total Amount Paid</label>
-              <input type="number" name="amount" class="col-sm-12"  min="0.01" step="0.01" placeholder="$0.00">
+              <label for="name">For</label>
+              <input type="name" name="name" class="form-control" placeholder="Enter Expense Name" />
             </div>
             <div class="form-group">
-              <label for="name">Date of Expense</label>
-              <input type="date" name="start">
+              <label for="date">Date</label>
+              <input type="date" name="date" class="form-control">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger shadow">Deduct Expense</button>
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger">Deduct Expense</button>
         </div>
       </div>
     </div>
