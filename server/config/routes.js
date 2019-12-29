@@ -4,42 +4,27 @@ const authorize = require('../controllers/authorize.js');
 const { ensureAuthenticated } = require('./auth');
 
 
-module.exports = function (app) { // By declaring as a function we can access each route individually
+module.exports = function (app) {
   // Welcome Page
-  app.get('/', function (req, res) {
-    base.home(req, res);
-  });
+  app.get('/', (req, res) => base.home(req, res));
+
   // Register Handles
-  app.get('/register', function (req, res) {
-    base.register(req, res);
-  });
-  app.post('/register', function (req, res) {
-    authorize.register(req, res);
-  });
+  app.get('/register', (req, res) => base.register(req, res));
+  app.post('/register', (req, res) => authorize.register(req, res));
+
   // Login Handles
-  app.get('/login', function (req, res) {
-    base.login(req, res);
-  });
-  app.post('/login', function (req, res, next) {
-    authorize.login(req, res, next);
-  });
-  // Dashboard
-  app.get('/dashboard', ensureAuthenticated, function (req, res){
-    base.dashboard(req, res);
-  });
+  app.get('/login', (req, res) => base.login(req, res));
+  app.post('/login', (req, res, next) => authorize.login(req, res, next));
+
   // Logout Handle
   app.get('/logout', (req, res) => authorize.logout(req, res));
+
+  // Dashboard
+  app.get('/dashboard', ensureAuthenticated, (req, res) => base.dashboard(req, res));
+
+  // History
+  app.get('/history', ensureAuthenticated, (req, res) => res.render('history'));
+
+  // Settings
+  app.get('/settings', ensureAuthenticated, (req, res) => res.render('settings'));
 }
-
-
-
-// Routes
-// app.get('/ml/dashboard', (req, res) => {
-//   res.render('dashboard')
-// })
-// app.get('/ml/history', (req, res) => {
-//   res.render('history')
-// })
-// app.get('/ml/settings', (req, res) => {
-//   res.render('settings')
-// })

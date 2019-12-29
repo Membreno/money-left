@@ -106,7 +106,6 @@ module.exports = { // We export so methods can be accessed in our routes
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/login');
-    console.log("Logout ID: " + req.session.user_id)
   }
 
 }

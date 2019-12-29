@@ -1,3 +1,5 @@
 node_modules/
 .env
 _ideas.js
+views/basic-navbar.ejs
+views/navbar.ejs
