@@ -22,14 +22,14 @@
         <a class="nav-item nav-link" href="/ml/dashboard">Dashboard</a>
         <a class="nav-item nav-link" href="/ml/history">History</a>
         <a class="nav-item nav-link" href="/ml/settings">Settings</a>
-        <a class="nav-item nav-link disabled" href="/logout">Log Out</a>
+        <a class="nav-item nav-link" href="/logout">Log Out</a>
       </div>
     </div>
   </nav>
 
   <div class="container">
     <div class="total-funds">
-      <h4 class="total-funds__amount">$1000.00</h4>
+      <h4 class="total-funds__amount">$<%= bank %></h4>
     </div>
     <div class="modify-funds">
       <button class="btn btn-success shadow border border-dark" data-toggle="modal"

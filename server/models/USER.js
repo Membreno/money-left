@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  bank: {
+    type: Number,
+    default: 0
   }
 }, {timestamps: true});
 

@@ -100,6 +100,13 @@ module.exports = { // We export so methods can be accessed in our routes
       failureRedirect: '/login',
       failureFlash: true
     })(req, res, next);
+  },
+  logout: (req, res) => {
+    req.session.user_id = null;
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/login');
+    console.log("Logout ID: " + req.session.user_id)
   }
 
 }
