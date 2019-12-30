@@ -36,19 +36,21 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="/income" method="POST">
+          <form action="/transaction" method="POST">
             <div class="form-group">
               <label for="amount">Total</label>
               <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
-                placeholder="$ 0.00">
+                placeholder="$ 0.00" required>
+              <input type="hidden" name="impact" value="pos">
+              <input type="hidden" name="bank" value="<%= bank %>">
             </div>
             <div class="form-group">
               <label for="name">From</label>
-              <input type="name" name="name" class="form-control" placeholder="Enter Resource Name" />
+              <input type="name" name="name" class="form-control" placeholder="Enter Resource Name" required/>
             </div>
             <div class="form-group">
               <label for="date">Date</label>
-              <input type="date" name="date" class="form-control">
+              <input type="date" name="date" class="form-control" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
@@ -71,11 +73,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="/income" method="POST">
+          <form action="/transaction" method="POST">
             <div class="form-group">
               <label for="amount">Total</label>
               <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
                 placeholder="$ 0.00">
+              <input type="hidden" name="impact" value="neg">
+              <input type="hidden" name="bank" value="<%= bank %>">
             </div>
             <div class="form-group">
               <label for="name">For</label>

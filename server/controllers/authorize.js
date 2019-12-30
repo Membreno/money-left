@@ -4,6 +4,7 @@ const flash = require('express-flash');
 const User = require('../models/USER');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passport = require('passport');
+const Transaction = mongoose.model('Transaction')
 
 module.exports = { // We export so methods can be accessed in our routes
   register: (req, res) => {
@@ -106,6 +107,33 @@ module.exports = { // We export so methods can be accessed in our routes
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/login');
+  },
+  transaction: (req, res) => {
+    const {
+      amount,
+      name,
+      date,
+      impact
+    } = req.body;
+    const bank = req.body.impact === 'pos' ? Number(req.body.bank) + Number(amount) : Number(req.body.bank) - Number(amount);
+
+    // Validation Passed
+    const transaction = new Transaction({amount, name, date, impact, bank})
+    transaction.save(
+      User.findOne({_id: req.session.user_id}, function(err, user){
+        user.transactions.push(transaction)
+        user.bank = bank;
+        user.save()
+          .then(_ => {
+            req.flash('success_msg', 'You completed a transaction')
+            res.redirect('/dashboard')
+          })
+          .catch(err =>{
+            console.log(err)
+            res.redirect('/dashboard')
+          })
+      })
+    )
   }
 
 }

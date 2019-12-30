@@ -27,4 +27,7 @@ module.exports = function (app) {
 
   // Settings
   app.get('/settings', ensureAuthenticated, (req, res) => res.render('settings'));
+
+  // Transactions
+  app.post('/transaction', ensureAuthenticated, (req, res) => authorize.transaction(req, res));
 }
