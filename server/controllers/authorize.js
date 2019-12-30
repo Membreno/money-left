@@ -134,6 +134,14 @@ module.exports = { // We export so methods can be accessed in our routes
           })
       })
     )
+  },
+  history: function (req, res) {
+    User.findOne({_id: req.session.user_id}, function (err, user){
+      if(!err){
+        let transactions = user.transactions;
+        res.render('history', { transactions })
+      }
+    })
   }
 
 }

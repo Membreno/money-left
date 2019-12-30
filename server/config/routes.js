@@ -23,7 +23,7 @@ module.exports = function (app) {
   app.get('/dashboard', ensureAuthenticated, (req, res) => base.dashboard(req, res));
 
   // History
-  app.get('/history', ensureAuthenticated, (req, res) => res.render('history'));
+  app.get('/history', ensureAuthenticated, (req, res) => authorize.history(req, res));
 
   // Settings
   app.get('/settings', ensureAuthenticated, (req, res) => res.render('settings'));

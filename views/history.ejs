@@ -23,17 +23,24 @@
     <button class="btn shadow btn-outline-warning">ALL</button>
   </div>
   <table class="update">
-      <thead>
+      <!-- <thead>
         <tr>
           <th scope="col" class="update-date">NOV 20, 2019</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody class="update-info">
-        <td class="update-title">Target</td>
+        <% for (let trans of transactions) { %>
+        <tr>
+          <td class="update-date">NOV 20, 2019</td>
+          <tr>
+            <td class="update-title">Target</td>
+          </tr>
           <tr class="update-dollars">
             <td class="update-amount">$1,000.00</td>
             <td class="update-spent text-right">-$54.70</td>
           </tr>
+        </tr>
+          <% } %>
       </tbody>
     </table>
 </div>
