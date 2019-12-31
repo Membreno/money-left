@@ -22,27 +22,20 @@
     <button class="btn shadow btn-outline-dark">3 MONTHS</button>
     <button class="btn shadow btn-outline-warning">ALL</button>
   </div>
-  <table class="update">
-      <!-- <thead>
-        <tr>
-          <th scope="col" class="update-date">NOV 20, 2019</th>
-        </tr>
-      </thead> -->
-      <tbody class="update-info">
-        <% for (let trans of transactions) { %>
-        <tr>
-          <td class="update-date">NOV 20, 2019</td>
-          <tr>
-            <td class="update-title">Target</td>
-          </tr>
-          <tr class="update-dollars">
-            <td class="update-amount">$1,000.00</td>
-            <td class="update-spent text-right">-$54.70</td>
-          </tr>
-        </tr>
-          <% } %>
-      </tbody>
-    </table>
+
+  <div class="transaction">
+    <% for (let trans of transactions) { %>
+      <p class="transaction-title">TARGET</p>
+      <div class="transaction-info">
+        <p class="transaction-date">Nov 20, 2019</p>
+        <p class="transaction-bank">$1,000</p>
+      </div>
+      <p class="transaction-amount">-$ 52.70</p>
+      <hr>
+    <% } %>
+  </div>
+  <hr>
+
 </div>
 
 <script src="../js/app.js" type="module"></script>
