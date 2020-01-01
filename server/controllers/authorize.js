@@ -5,6 +5,7 @@ const User = require('../models/USER');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passport = require('passport');
 const Transaction = mongoose.model('Transaction')
+const moment = require('moment');
 
 module.exports = { // We export so methods can be accessed in our routes
   register: (req, res) => {
@@ -139,9 +140,27 @@ module.exports = { // We export so methods can be accessed in our routes
     User.findOne({_id: req.session.user_id}, function (err, user){
       if(!err){
         let transactions = user.transactions;
-        res.render('history', { transactions })
+        transactions = transactions.sort((a, b) => {
+          return (a.date < b.date) ? 1 : -1
+        })
+        const formatDate = function (timestamp) {
+          return moment(timestamp).format('MMMM DD, YYYY');
+        }
+        res.render('history', { transactions, formatDate })
       }
     })
   }
 
+}
+
+
+function glowPos(){
+  const glowIcon = document.getElementById(total-funds__amount);
+  glowIcon.classList.add("green-glow");
+  setTimeout(() => glowIcon.classList.remove("green-glow"), 300);
+}
+function glowNeg(){
+  const glowIcon = document.getElementById(total-funds__amount);
+  glowIcon.classList.add("red-glow");
+  setTimeout(() => glowIcon.classList.remove("red-glow"), 300);
 }

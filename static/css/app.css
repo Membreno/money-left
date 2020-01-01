@@ -57,6 +57,14 @@
   width: 100%;
   text-align: center; }
 
+.green-glow {
+  border: 4px solid #4dcc7d;
+  box-shadow: 0 0 10px #31b43a; }
+
+.red-glow {
+  border: 4px solid #fc121b;
+  box-shadow: 0 0 10px #d01115; }
+
 #monthly__expenses table {
   text-align: center; }
 
@@ -102,7 +110,6 @@
   margin-top: 0.2rem; }
 
 .transaction-amount {
-  color: #aa0000;
   vertical-align: top;
   width: 40%;
   display: inline-block;

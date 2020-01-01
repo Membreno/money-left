@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="total-funds">
-    <h4 class="total-funds__amount">$<%= bank %></h4>
+    <h4 id="total-funds__amount" class="total-funds__amount">$<%= bank %></h4>
   </div>
   <div class="modify-funds">
     <button class="btn btn-success shadow border border-dark" data-toggle="modal"
@@ -40,17 +40,13 @@
             <div class="form-group">
               <label for="amount">Total</label>
               <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
-                placeholder="$ 0.00" required>
+                placeholder="$ 0.00" max="1000000" required>
               <input type="hidden" name="impact" value="pos">
               <input type="hidden" name="bank" value="<%= bank %>">
             </div>
             <div class="form-group">
               <label for="name">From</label>
               <input type="name" name="name" class="form-control" placeholder="Enter Resource Name" required/>
-            </div>
-            <div class="form-group">
-              <label for="date">Date</label>
-              <input type="date" name="date" class="form-control" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>
@@ -77,17 +73,13 @@
             <div class="form-group">
               <label for="amount">Total</label>
               <input type="number" name="amount" class="form-control" min="0.01" step="0.01"
-                placeholder="$ 0.00">
+                placeholder="$ 0.00" max="1000000" required>
               <input type="hidden" name="impact" value="neg">
               <input type="hidden" name="bank" value="<%= bank %>">
             </div>
             <div class="form-group">
               <label for="name">For</label>
-              <input type="name" name="name" class="form-control" placeholder="Enter Expense Name" />
-            </div>
-            <div class="form-group">
-              <label for="date">Date</label>
-              <input type="date" name="date" class="form-control">
+              <input type="name" name="name" class="form-control" placeholder="Enter Expense Name" required/>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary shadow" data-dismiss="modal">Close</button>

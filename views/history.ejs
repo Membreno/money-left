@@ -25,12 +25,12 @@
 
   <div class="transaction">
     <% for (let trans of transactions) { %>
-      <p class="transaction-title">TARGET</p>
+      <p class="transaction-title"><%= trans.name %></p>
       <div class="transaction-info">
-        <p class="transaction-date">Nov 20, 2019</p>
-        <p class="transaction-bank">$1,000</p>
+        <p class="transaction-date"><%= formatDate(trans.date) %></p>
+        <p class="transaction-bank">$<%= trans.bank %></p>
       </div>
-      <p class="transaction-amount">-$ 52.70</p>
+      <p class="transaction-amount">$ <%= trans.amount%></p>
       <hr>
     <% } %>
   </div>
