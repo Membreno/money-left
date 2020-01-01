@@ -16,6 +16,7 @@
 </nav>
 
 <div class="container">
+  <h1 class="text-center mb-3">History <i class="fas fa-history"></i></h1>
   <div class="filter-triggers text-center">
     <button class="btn shadow btn-outline-primary">WEEK</button>
     <button class="btn shadow btn-outline-dark">MONTH</button>
@@ -30,7 +31,11 @@
         <p class="transaction-date"><%= formatDate(trans.date) %></p>
         <p class="transaction-bank">$<%= trans.bank %></p>
       </div>
-      <p class="transaction-amount">$ <%= trans.amount%></p>
+      <% if(trans.impact !== 'pos') { %>
+        <p class="transaction-amount neg">-$ <%= trans.amount%></p>
+      <% } else {%>
+        <p class="transaction-amount">$ <%= trans.amount%></p>
+      <% } %>
       <hr>
     <% } %>
   </div>

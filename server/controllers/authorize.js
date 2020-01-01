@@ -141,7 +141,7 @@ module.exports = { // We export so methods can be accessed in our routes
       if(!err){
         let transactions = user.transactions;
         transactions = transactions.sort((a, b) => {
-          return (a.date < b.date) ? 1 : -1
+          return (a.createdAt < b.createdAt) ? 1 : -1
         })
         const formatDate = function (timestamp) {
           return moment(timestamp).format('MMMM DD, YYYY');
