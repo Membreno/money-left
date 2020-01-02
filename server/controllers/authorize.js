@@ -4,7 +4,8 @@ const flash = require('express-flash');
 const User = require('../models/USER');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passport = require('passport');
-const Transaction = mongoose.model('Transaction')
+const Transaction = mongoose.model('Transaction');
+const Bill = mongoose.model('Bill');
 const moment = require('moment');
 
 module.exports = { // We export so methods can be accessed in our routes
@@ -23,21 +24,18 @@ module.exports = { // We export so methods can be accessed in our routes
         msg: 'Please fill in all fields'
       })
     }
-
     // Check passwords match
     if (password !== password2) {
       errors.push({
         msg: 'Passwords do not match'
       })
     }
-
     // Check password length
     if (password.length < 6) {
       errors.push({
         msg: 'Password must be at least 6 characters'
       })
     }
-
     // Check if email matches pattern
     if (!EMAIL_REGEX.test(email)) {
       errors.push({
@@ -96,6 +94,7 @@ module.exports = { // We export so methods can be accessed in our routes
         })
     }
   },
+
   login: (req, res, next) => {
     passport.authenticate('local', {
       successRedirect: '/dashboard',
@@ -103,12 +102,14 @@ module.exports = { // We export so methods can be accessed in our routes
       failureFlash: true
     })(req, res, next);
   },
+
   logout: (req, res) => {
     req.session.user_id = null;
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/login');
   },
+
   transaction: (req, res) => {
     const {
       amount,
@@ -136,6 +137,7 @@ module.exports = { // We export so methods can be accessed in our routes
       })
     )
   },
+
   history: function (req, res) {
     User.findOne({_id: req.session.user_id}, function (err, user){
       if(!err){
@@ -149,6 +151,35 @@ module.exports = { // We export so methods can be accessed in our routes
         res.render('history', { transactions, formatDate })
       }
     })
+  },
+
+  add_bill: function(req, res){
+    const {
+      name,
+      date,
+      amount,
+      repeats
+    } = req.body;
+
+    // Validation Passed
+    const bill = new Bill ({name, amount, date, repeats});
+    bill.save(
+      User.findOne({_id: req.session.user_id}, function (err, user){
+      if(!err){
+        user.bills.push(bill)
+        user.save()
+          .then(_ => {
+            req.flash('success_msg', 'You added a new bill')
+            res.redirect('/dashboard')
+          })
+          .catch(err => {
+            console.log(err)
+            req.flash('error_msg', "Something went wrong. Couldn't add new bill")
+            res.redirect('/dashboard')
+          })
+      }
+    })
+    )
   }
 
 }
