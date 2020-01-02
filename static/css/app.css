@@ -145,7 +145,7 @@ hr.style-one {
 
 .modal__content {
   background: linear-gradient(to bottom right, #018910, #0075AA);
-  width: 80%;
+  width: 90%;
   max-width: 640px;
   margin: 3rem auto;
   border-radius: 4px;
@@ -164,16 +164,11 @@ hr.style-one {
 .open {
   display: block; }
 
-.modal__title {
-  text-align: center;
-  font-family: "Lakki Reddy", cursive;
-  color: white; }
-
 .close-exit {
   position: absolute;
   color: #DDD7CE;
-  top: 0px;
-  left: 10px;
+  top: -25px;
+  right: 10px;
   font-size: 4rem;
   background: transparent;
   border: 0;
@@ -181,44 +176,5 @@ hr.style-one {
 
 .close-exit:hover {
   cursor: pointer; }
-
-.modal__body {
-  padding: 2rem;
-  text-align: center;
-  font-family: Lato, sans-serif;
-  color: #DDD7CE;
-  line-height: 2rem; }
-
-/*** form styles ** */
-.form {
-  margin-top: 1rem; }
-
-.form__email {
-  color: #DDD7CE;
-  width: 100%;
-  display: block;
-  border: 3px solid #DDD7CE;
-  outline: none;
-  font-size: 1rem;
-  padding: 1rem;
-  background: transparent; }
-
-.form__submit {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1rem;
-  background: #eee;
-  font-size: 1.4rem;
-  color: #2C3344;
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
-  border: 0;
-  border-radius: 4px;
-  outline: 0; }
-
-.form__submit:hover {
-  cursor: pointer;
-  opacity: 0.9; }
 
 /*# sourceMappingURL=app.css.map */
