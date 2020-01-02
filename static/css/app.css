@@ -164,6 +164,7 @@ hr.style-one {
 .open {
   display: block; }
 
+/*** custom close button ** */
 .close-exit {
   position: absolute;
   color: #DDD7CE;
