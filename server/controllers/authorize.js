@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const flash = require('express-flash');
 const User = require('../models/USER');
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const passport = require('passport');
@@ -183,16 +182,4 @@ module.exports = { // We export so methods can be accessed in our routes
     )
   }
 
-}
-
-
-function glowPos(){
-  const glowIcon = document.getElementById(total-funds__amount);
-  glowIcon.classList.add("green-glow");
-  setTimeout(() => glowIcon.classList.remove("green-glow"), 300);
-}
-function glowNeg(){
-  const glowIcon = document.getElementById(total-funds__amount);
-  glowIcon.classList.add("red-glow");
-  setTimeout(() => glowIcon.classList.remove("red-glow"), 300);
 }

@@ -1,4 +1,3 @@
-const path = require('path');
 const base = require('../controllers/base.js'); // Used to access the methods within controller
 const authorize = require('../controllers/authorize.js');
 const { ensureAuthenticated } = require('./auth');

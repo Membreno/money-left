@@ -25,7 +25,9 @@
   </div>
 
   <% if(transactions.length === 0){ %>
-    <img class="img-thumbnail" src="images/nothing_to_see.jpg">
+    <div class="container text-center">
+      <img class="img-thumbnail" src="images/nothing_to_see.jpg">
+    </div>
   <% } else { %>
   <div class="transaction">
     <% for (let trans of transactions) { %>
@@ -39,6 +41,7 @@
       <% } else {%>
         <p class="transaction-amount">$ <%= trans.amount%></p>
       <% } %>
+      <a href=""><i class="fas fa-trash-alt"></i></a>
       <hr>
     <% } %>
   </div>
