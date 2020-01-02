@@ -26,20 +26,25 @@ module.exports = { // We export so methods can be accessed in our routes
   dashboard: function (req, res) {
     req.session.user_id = req.user.id // POSSIBLY NOT NEEDED
     let today = moment(new Date()).format('YYYY-MM-DD');
-    const formatDate = function (timestamp) {
+    const formatDateDay = function (timestamp) {
       return moment(timestamp).format('Do');
     }
+    const formatDate = function (timestamp) {
+      return moment(timestamp).format('MMMM DD, YYYY');
+    }
     User.findOne({_id: req.session.user_id}, function (err, user){
-      var bills = user.bills;
+      let bills = user.bills;
       bills = bills.sort((a, b) => {
         return (a.date > b.date) ? 1 : -1
       })
       res.render('dashboard', {
         name: req.user.name,
-        bank: req.user.bank,
+        bank: user.bank,
         today,
         bills,
-        formatDate
+        formatDate,
+        formatDateDay,
+        transactions: user.transactions
       })
     })
   }

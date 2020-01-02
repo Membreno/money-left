@@ -140,7 +140,7 @@
       <tbody class="monthly__expense-details">
         <% for (let bill of bills) { %>
           <tr>
-            <td class="monthly__expense-date"><%= formatDate(bill.date) %></td>
+            <td class="monthly__expense-date"><%= formatDateDay(bill.date) %></td>
             <td class="monthly__expense-name"><%= bill.name %></td>
             <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
             <td>
@@ -157,7 +157,28 @@
         <% } %>
       </tbody>
     </table>
+    <% if(bills.length === 0) {%>
+      <h3 class="text-center"><i class="fas fa-bell"></i> Add Some Bills</h3>
+    <% } %>
   </div>
-</div>
-<hr>
+  <!-- Recent Transactions-->
+  <% if (transactions.length >= 3) { %>
+    <h4 class="form-text text-muted text-center">Recent Transactions</h4>
+    <div class="transaction-sm">
+      <% for (let i = transactions.length - 1; i > transactions.length - 4; --i) { %>
+        <p class="transaction-title"><%= transactions[i].name %></p>
+        <div class="transaction-info">
+          <p class="transaction-date"><%= formatDate(transactions[i].date) %></p>
+          <p class="transaction-bank">$<%= transactions[i].bank %></p>
+        </div>
+      <% if(transactions[i].impact !== 'pos') { %>
+        <p class="transaction-amount neg">-$ <%= transactions[i].amount%></p>
+      <% } else {%>
+        <p class="transaction-amount">$ <%= transactions[i].amount%></p>
+      <% } %>
+      <hr>
+      <% } %>
+    </div>
+  <% } %>
+  <hr>
 <script src="../js/app.js" type="module"></script>

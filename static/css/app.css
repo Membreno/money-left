@@ -69,7 +69,8 @@
   text-align: center; }
 
 #monthly__expenses {
-  height: 250px;
+  min-height: 125px;
+  max-height: 250px;
   overflow-y: scroll; }
 
 .modify-funds {
@@ -91,6 +92,10 @@
   box-sizing: border-box;
   overflow-y: scroll;
   height: 425px; }
+
+.transaction-sm {
+  width: 80%;
+  margin: 0 auto; }
 
 .transaction-title {
   font-size: 1.5rem;
