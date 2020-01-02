@@ -1,4 +1,7 @@
 const moment = require('moment');
+const mongoose = require('mongoose');
+const User = mongoose.model('User')
+
 
 module.exports = { // We export so methods can be accessed in our routes
   home: (req, res) => {
@@ -21,8 +24,23 @@ module.exports = { // We export so methods can be accessed in our routes
     }
   },
   dashboard: function (req, res) {
-    let today = moment(new Date()).format('YYYY-MM-DD');
     req.session.user_id = req.user.id // POSSIBLY NOT NEEDED
-    res.render('dashboard', { name: req.user.name, bank: req.user.bank, today })
+    let today = moment(new Date()).format('YYYY-MM-DD');
+    const formatDate = function (timestamp) {
+      return moment(timestamp).format('Do');
+    }
+    User.findOne({_id: req.session.user_id}, function (err, user){
+      var bills = user.bills;
+      bills = bills.sort((a, b) => {
+        return (a.date > b.date) ? 1 : -1
+      })
+      res.render('dashboard', {
+        name: req.user.name,
+        bank: req.user.bank,
+        today,
+        bills,
+        formatDate
+      })
+    })
   }
 }

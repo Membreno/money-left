@@ -39,7 +39,11 @@ const BillSchema = new mongoose.Schema({
   isPaid: {
     type: Boolean,
     default: false
-  }
+  },
+  impact: {
+    type: String,
+    default: 'neg'
+  },
 }, {
   timestamps: true
 });

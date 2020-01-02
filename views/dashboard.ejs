@@ -110,19 +110,7 @@
           </div>
           <div class="form-group">
             <label for="date">Next Billing Date</label>
-            <input type="date" name="date" class="form-control bill-input" min="<%= today %>"" required>
-          </div>
-          <div class="form-group">
-            <p>Is this a monthly reoccurring bill?</p>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="repeats" id="reprepeats-true" value="true"
-                checked="checked">
-              <label class="form-check-label" for="reprepeats-true">YES</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="repeats" id="reprepeats-false" value="false">
-              <label class="form-check-label" for="reprepeats-false">NO</label>
-            </div>
+            <input type="date" name="date" class="form-control bill-input" min="<%= today %>" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary shadow close-exit-button" data-dismiss="modal">Close</button>
@@ -143,13 +131,31 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th scope="col">Due Date</th>
+          <th scope="col">Monthly Due Date</th>
           <th scope="col">Expense Name</th>
           <th scope="col">Amount Owed</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
-      <tbody class="monthly__expense-details"> </tbody>
+      <tbody class="monthly__expense-details">
+        <% for (let bill of bills) { %>
+          <tr>
+            <td class="monthly__expense-date"><%= formatDate(bill.date) %></td>
+            <td class="monthly__expense-name"><%= bill.name %></td>
+            <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
+            <td>
+              <form action="/transaction" method="POST">
+                <input type="hidden" name="amount" value="<%= bill.amount %>">
+                <input type="hidden" name="impact" value="neg">
+                <input type="hidden" name="bank" value="<%= bank %>">
+                <input type="hidden" name="name" value="<%= bill.name %>">
+                <input type="hidden" name="date" value="<%= today %>">
+                <button type="submit" class="btn btn-outline-success shadow">Pay</button>
+              </form>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
     </table>
   </div>
 </div>

@@ -154,9 +154,10 @@ module.exports = { // We export so methods can be accessed in our routes
   },
 
   add_bill: function(req, res){
+    // Need to format date before saving for the correct date to show
+    const date = moment(req.body.date).format('YYYY/MM/DD')
     const {
       name,
-      date,
       amount,
       repeats
     } = req.body;
