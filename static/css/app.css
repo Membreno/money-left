@@ -128,6 +128,10 @@ hr.style-one {
   background: #333;
   background-image: linear-gradient(to right, #ccc, #333, #ccc); }
 
+.img-thumbnail {
+  width: 100%;
+  border: none; }
+
 .trigger:hover {
   cursor: pointer; }
 

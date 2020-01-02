@@ -19,6 +19,31 @@ const TransactionSchema = new mongoose.Schema({
   timestamps: true
 });
 
+const BillSchema = new mongoose.Schema({
+  amount: {
+    type: Number,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    required: true
+  },
+  repeats: {
+    type: Boolean,
+    default: true
+  },
+  isPaid: {
+    type: Boolean,
+    default: false
+  }
+}, {
+  timestamps: true
+});
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -36,9 +61,11 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  transactions: [TransactionSchema]
+  transactions: [TransactionSchema],
+  bills: [BillSchema]
 }, {timestamps: true});
 
 const User = mongoose.model('User', UserSchema);
 const Transaction = mongoose.model('Transaction', TransactionSchema);
+const Bill = mongoose.model('Bill', BillSchema);
 module.exports = User;

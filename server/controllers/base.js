@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = { // We export so methods can be accessed in our routes
   home: (req, res) => {
     res.render('index')
@@ -19,7 +21,8 @@ module.exports = { // We export so methods can be accessed in our routes
     }
   },
   dashboard: function (req, res) {
+    let today = moment(new Date()).format('YYYY-MM-DD');
     req.session.user_id = req.user.id // POSSIBLY NOT NEEDED
-    res.render('dashboard', { name: req.user.name, bank: req.user.bank })
+    res.render('dashboard', { name: req.user.name, bank: req.user.bank, today })
   }
 }

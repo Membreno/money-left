@@ -24,6 +24,9 @@
     <button class="btn shadow btn-outline-warning">ALL</button>
   </div>
 
+  <% if(transactions.length === 0){ %>
+    <img class="img-thumbnail" src="images/nothing_to_see.jpg">
+  <% } else { %>
   <div class="transaction">
     <% for (let trans of transactions) { %>
       <p class="transaction-title"><%= trans.name %></p>
@@ -40,5 +43,6 @@
     <% } %>
   </div>
   <hr>
+  <% } %>
 
 </div>
