@@ -47,5 +47,5 @@ app.use((req, res, next) => {
 require('./server/config/mongoose.js');
 require('./server/config/routes.js')(app); // Passing the app as a input for our routes function
 
-const PORT = process.env.PORT || 5000 || '127.0.0.1';
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, _ => console.log(`Server started on port ${PORT}`));

@@ -72,23 +72,14 @@ module.exports = { // We export so methods can be accessed in our routes
             const newUser = new User({
               name,
               email,
-              password
             });
-
-            // Hash Password
-            bcrypt.genSalt(10, (err, salt) =>
-              bcrypt.hash(newUser.password, salt, (err, hash) => {
-                if (err) throw err;
-                // Set password to hashed
-                newUser.password = hash;
-                // Save user
-                newUser.save()
-                  .then(user => {
-                    req.flash('success_msg', 'You are now registered and can log in');
-                    res.redirect('/login');
-                  })
-                  .catch(err => console.log(err))
-              }))
+            // Save user
+            newUser.save()
+              .then(user => {
+                req.flash('success_msg', 'You are now registered and can log in');
+                res.redirect('/login');
+              })
+              .catch(err => console.log(err))
           }
         })
     }
@@ -165,7 +156,7 @@ module.exports = { // We export so methods can be accessed in our routes
       amount,
       repeats
     } = req.body;
-    // Format bill name 
+    // Format bill name
     let name = req.body.name;
     name = name.toLowerCase()
       .split(' ')
