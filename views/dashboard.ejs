@@ -21,8 +21,8 @@
   </div>
   <div class="modify-funds">
     <button class="btn btn-success shadow border border-dark" data-toggle="modal"
-      data-target="#addIncome__trigger"><i class="fa fa-money" aria-hidden></i> Add Income</button>
-    <button class="btn btn-danger shadow border border-dark" data-toggle="modal" data-target="#addExpense__trigger">Deduct Expense <i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+      data-target="#addIncome__trigger">Add Income</button>
+    <button class="btn btn-danger shadow border border-dark" data-toggle="modal" data-target="#addExpense__trigger">Deduct Expense</button>
   </div>
   <!-- Modal Income-->
   <div class="modal fade" id="addIncome__trigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -141,7 +141,7 @@
         <% for (let bill of bills) { %>
           <tr>
             <td class="monthly__expense-date"><%= formatDateDay(bill.date) %></td>
-            <td class="monthly__expense-name"><%= bill.name %></td>
+            <td class="monthly__expense-name"><a href="/edit/<%= bill.id %>"><%= bill.name %></a></td>
             <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
             <td>
               <form action="/transaction" method="POST">
