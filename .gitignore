@@ -3,3 +3,5 @@ node_modules/
 _ideas.js
 views/basic-navbar.ejs
 views/navbar.ejs
+static/js/modules/addBillModal.js
+static/js/modules/getRecentTransactions.js

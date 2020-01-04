@@ -35,7 +35,7 @@ module.exports = { // We export so methods can be accessed in our routes
     User.findOne({_id: req.session.user_id}, function (err, user){
       let bills = user.bills;
       bills = bills.sort((a, b) => {
-        return (a.date > b.date) ? 1 : -1
+        return (a.date.getDate() > b.date.getDate()) ? 1 : -1
       })
       res.render('dashboard', {
         name: req.user.name,
