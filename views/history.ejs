@@ -9,7 +9,6 @@
       <a class="nav-item nav-link active" href="/">Home</a>
       <a class="nav-item nav-link" href="/dashboard">Dashboard</a>
       <a class="nav-item nav-link" href="/history">History</a>
-      <a class="nav-item nav-link" href="/settings">Settings</a>
       <a class="nav-item nav-link" href="/logout">Log Out</a>
     </div>
   </div>
@@ -17,12 +16,6 @@
 
 <div class="container">
   <h1 class="text-center mb-3">History <i class="fas fa-history"></i></h1>
-  <div class="filter-triggers text-center">
-    <button class="btn shadow btn-outline-primary">WEEK</button>
-    <button class="btn shadow btn-outline-dark">MONTH</button>
-    <button class="btn shadow btn-outline-dark">3 MONTHS</button>
-    <button class="btn shadow btn-outline-warning">ALL</button>
-  </div>
 
   <% if(transactions.length === 0){ %>
     <div class="container text-center">
@@ -37,9 +30,9 @@
         <p class="transaction-bank">$<%= trans.bank %></p>
       </div>
       <% if(trans.impact !== 'pos') { %>
-        <p class="transaction-amount neg">-$ <%= trans.amount%></p>
+        <p class="transaction-amount neg">-$ <%= trans.amount.toFixed(2) %></p>
       <% } else {%>
-        <p class="transaction-amount">$ <%= trans.amount%></p>
+        <p class="transaction-amount">$ <%= trans.amount.toFixed(2) %></p>
       <% } %>
       <a href=""><i class="fas fa-trash-alt"></i></a>
       <hr>

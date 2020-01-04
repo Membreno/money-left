@@ -9,7 +9,6 @@
       <a class="nav-item nav-link" href="/">Home</a>
       <a class="nav-item nav-link" href="/dashboard">Dashboard</a>
       <a class="nav-item nav-link" href="/history">History</a>
-      <a class="nav-item nav-link" href="/settings">Settings</a>
       <a class="nav-item nav-link" href="/logout">Log Out</a>
     </div>
   </div>
@@ -17,7 +16,7 @@
 
 <div class="container">
   <div class="total-funds">
-    <h3 id="total-funds__amount" class="total-funds__amount">$<%= bank %></h3>
+    <h3 id="total-funds__amount" class="total-funds__amount">$<%= bank.toFixed(2) %></h3>
   </div>
   <div class="modify-funds">
     <button class="btn btn-success shadow border border-dark" data-toggle="modal"
@@ -131,17 +130,17 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th scope="col">Monthly Due Date</th>
+          <th scope="col">Due Date</th>
           <th scope="col">Expense Name</th>
           <th scope="col">Amount Owed</th>
-          <th scope="col">Action</th>
+          <th scope="col">Make Payment</th>
         </tr>
       </thead>
       <tbody class="monthly__expense-details">
         <% for (let bill of bills) { %>
           <tr>
             <td class="monthly__expense-date"><%= formatDateDay(bill.date) %></td>
-            <td class="monthly__expense-name"><a href="/edit/<%= bill.id %>"><%= bill.name %></a></td>
+            <td class="monthly__expense-name"><%= bill.name %></td>
             <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
             <td>
               <form action="/transaction" method="POST">
@@ -163,7 +162,7 @@
   </div>
   <!-- Recent Transactions-->
   <% if (transactions.length >= 3) { %>
-    <h4 class="form-text text-muted text-center">Recent Transactions</h4>
+    <h4 class="form-text text-muted text-center mt-3">Recent Transactions</h4>
     <div class="transaction-sm">
       <% for (let i = transactions.length - 1; i > transactions.length - 4; --i) { %>
         <p class="transaction-title"><%= transactions[i].name %></p>
@@ -172,9 +171,9 @@
           <p class="transaction-bank">$<%= transactions[i].bank %></p>
         </div>
       <% if(transactions[i].impact !== 'pos') { %>
-        <p class="transaction-amount neg">-$ <%= transactions[i].amount%></p>
+        <p class="transaction-amount neg">-$ <%= transactions[i].amount.toFixed(2) %></p>
       <% } else {%>
-        <p class="transaction-amount">$ <%= transactions[i].amount%></p>
+        <p class="transaction-amount">$ <%= transactions[i].amount.toFixed(2) %></p>
       <% } %>
       <hr>
       <% } %>

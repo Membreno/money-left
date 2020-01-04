@@ -191,6 +191,5 @@ module.exports = { // We export so methods can be accessed in our routes
       }
     })
     )
-  }
-
+  },
 }
