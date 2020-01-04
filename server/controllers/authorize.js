@@ -112,11 +112,17 @@ module.exports = { // We export so methods can be accessed in our routes
   transaction: (req, res) => {
     const {
       amount,
-      name,
       date,
       impact
     } = req.body;
+    // Styling for transactions
     const bank = req.body.impact === 'pos' ? Number(req.body.bank) + Number(amount) : Number(req.body.bank) - Number(amount);
+    // Format transaction name
+    let name = req.body.name;
+    name = name.toLowerCase()
+      .split(' ')
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
 
     // Validation Passed
     const transaction = new Transaction({amount, name, date, impact, bank})
@@ -156,10 +162,15 @@ module.exports = { // We export so methods can be accessed in our routes
     // Need to format date before saving for the correct date to show
     const date = moment(req.body.date).format('YYYY/MM/DD')
     const {
-      name,
       amount,
       repeats
     } = req.body;
+    // Format bill name 
+    let name = req.body.name;
+    name = name.toLowerCase()
+      .split(' ')
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
 
     // Validation Passed
     const bill = new Bill ({name, amount, date, repeats});
