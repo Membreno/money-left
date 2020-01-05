@@ -140,7 +140,14 @@
         <% for (let bill of bills) { %>
           <tr>
             <td class="monthly__expense-date"><%= formatDateDay(bill.date) %></td>
-            <td class="monthly__expense-name"><%= bill.name %></td>
+            <td class="monthly__expense-name">
+              <form action="/update" method="post">
+                <input type="hidden" name="bill_id" value="<%= bill.id %>">
+                <button type="submit" class="btn btn-link">
+                  <%= bill.name %>
+                </button>
+              </form>
+            </td>
             <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
             <td>
               <form action="/transaction" method="POST">

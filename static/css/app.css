@@ -27,6 +27,10 @@
 .alert-success {
   background: #56CC9D; }
 
+#dashboard {
+  text-decoration: none;
+  color: #eee; }
+
 /* LAYOUTS */
 .container {
   margin-top: 2rem; }

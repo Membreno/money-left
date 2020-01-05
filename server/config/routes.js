@@ -31,5 +31,8 @@ module.exports = function (app) {
   app.post('/transaction', ensureAuthenticated, (req, res) => authorize.transaction(req, res));
 
   // Billing Handles
+  app.get('/update', ensureAuthenticated, (req, res) => authorize.update(req, res));
+  app.post('/update', ensureAuthenticated, (req, res) => authorize.start_update(req, res));
   app.post('/add-bill', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
+
 }

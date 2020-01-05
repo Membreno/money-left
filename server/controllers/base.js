@@ -25,6 +25,7 @@ module.exports = { // We export so methods can be accessed in our routes
   },
   dashboard: function (req, res) {
     req.session.user_id = req.user.id // POSSIBLY NOT NEEDED
+    req.session.bill_id = null
     let today = moment(new Date()).format('YYYY-MM-DD');
     const formatDateDay = function (timestamp) {
       return moment(timestamp).format('Do');

@@ -167,20 +167,46 @@ module.exports = { // We export so methods can be accessed in our routes
     const bill = new Bill ({name, amount, date, repeats});
     bill.save(
       User.findOne({_id: req.session.user_id}, function (err, user){
+        if(!err){
+          user.bills.push(bill)
+          user.save()
+            .then(_ => {
+              req.flash('success_msg', 'You added a new bill')
+              res.redirect('/dashboard')
+            })
+            .catch(err => {
+              console.log(err)
+              req.flash('error_msg', "Something went wrong. Couldn't add new bill")
+              res.redirect('/dashboard')
+            })
+        }
+      })
+    )
+  },
+
+
+  start_update: function(req, res){
+    req.session.bill_id = req.body.bill_id
+    res.redirect('/update')
+  },
+  update: function(req, res){
+    if(!req.session.bill_id){
+      res.redirect('/dashboard')
+    } else {
+      User.findOne({_id: req.session.user_id}, function (err, user){
       if(!err){
-        user.bills.push(bill)
-        user.save()
-          .then(_ => {
-            req.flash('success_msg', 'You added a new bill')
-            res.redirect('/dashboard')
-          })
-          .catch(err => {
-            console.log(err)
-            req.flash('error_msg', "Something went wrong. Couldn't add new bill")
-            res.redirect('/dashboard')
-          })
+        let bills = user.bills
+        bills.forEach(bill =>{
+          if(bill.id === req.session.bill_id){
+            console.log(`HERE is the bills ID: ${bill.id}`)
+            let billInfo = bill
+            let billDate = moment(bill.date).format('YYYY-MM-DD')
+            let today = moment(new Date()).format('YYYY-MM-DD');
+            res.render('update', {bill: billInfo, billDate, today})
+          }
+        })
       }
     })
-    )
+    }
   },
 }
