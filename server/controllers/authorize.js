@@ -7,7 +7,8 @@ const Transaction = mongoose.model('Transaction');
 const Bill = mongoose.model('Bill');
 const moment = require('moment');
 
-module.exports = { // We export so methods can be accessed in our routes
+module.exports = {
+  // USER METHODS
   register: (req, res) => {
     const {
       name,
@@ -100,6 +101,7 @@ module.exports = { // We export so methods can be accessed in our routes
     res.redirect('/login');
   },
 
+  // TRANSACTION METHODS
   transaction: (req, res) => {
     const {
       amount,
@@ -120,7 +122,7 @@ module.exports = { // We export so methods can be accessed in our routes
     transaction.save(
       User.findOne({_id: req.session.user_id}, function(err, user){
         user.transactions.push(transaction)
-        user.bank = bank;
+        user.bank = (bank).toFixed(2);
         user.save()
           .then(_ => {
             req.flash('success_msg', 'You completed a transaction')
@@ -149,6 +151,7 @@ module.exports = { // We export so methods can be accessed in our routes
     })
   },
 
+  // BILLING METHOD
   add_bill: function(req, res){
     // Need to format date before saving for the correct date to show
     const date = moment(req.body.date).format('YYYY/MM/DD')
@@ -184,11 +187,12 @@ module.exports = { // We export so methods can be accessed in our routes
     )
   },
 
-
-  start_update: function(req, res){
+  // UPDATE METHODS
+  initiate_update: function (req, res) {
     req.session.bill_id = req.body.bill_id
     res.redirect('/update')
   },
+
   update: function(req, res){
     if(!req.session.bill_id){
       res.redirect('/dashboard')
@@ -198,7 +202,6 @@ module.exports = { // We export so methods can be accessed in our routes
         let bills = user.bills
         bills.forEach(bill =>{
           if(bill.id === req.session.bill_id){
-            console.log(`HERE is the bills ID: ${bill.id}`)
             let billInfo = bill
             let billDate = moment(bill.date).format('YYYY-MM-DD')
             let today = moment(new Date()).format('YYYY-MM-DD');
@@ -208,5 +211,41 @@ module.exports = { // We export so methods can be accessed in our routes
       }
     })
     }
+  },
+
+  save_update: function (req, res){
+    if(!req.session.bill_id){
+      res.redirect('/dashboard')
+    } else {
+      User.findOne({_id: req.session.user_id}, function (err, user){
+        if(!err){
+          let bills = user.bills
+          bills.forEach(bill =>{
+            if(bill.id === req.session.bill_id){
+              bill.name = req.body.name;
+              bill.amount = req.body.amount;
+              bill.date = moment(req.body.date).format('YYYY/MM/DD');
+            }
+          })
+        }
+        user.save()
+        res.redirect('/dashboard')
+      })
+    }
+  },
+
+  // DELETE METHODS
+  delete_bill: function (req, res) {
+    User.findOne({_id: req.session.user_id}, function (err, user) {
+      if (!err) {
+        user.bills.pull({_id: req.session.bill_id})
+        user.save()
+        Bill.deleteOne({_id: req.session.bill_id}, function (err){
+          if(!err){
+            res.redirect('/dashboard')
+          }
+        })
+      }
+    })
   },
 }

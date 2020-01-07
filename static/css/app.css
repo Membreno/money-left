@@ -31,6 +31,17 @@
   text-decoration: none;
   color: #eee; }
 
+#deleteBill {
+  color: #aa0000;
+  letter-spacing: 4.5px;
+  align-self: center;
+  margin-top: 1rem;
+  text-decoration: none; }
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly; }
+
 /* LAYOUTS */
 .container {
   margin-top: 2rem; }
@@ -123,9 +134,9 @@
   width: 40%;
   display: inline-block;
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   text-align: right;
-  padding-right: 1rem; }
+  padding-right: 0.5rem; }
 
 .neg {
   color: #aa0000; }

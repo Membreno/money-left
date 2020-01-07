@@ -32,7 +32,10 @@ module.exports = function (app) {
 
   // Billing Handles
   app.get('/update', ensureAuthenticated, (req, res) => authorize.update(req, res));
-  app.post('/update', ensureAuthenticated, (req, res) => authorize.start_update(req, res));
-  app.post('/add-bill', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
+  app.post('/bill/update', ensureAuthenticated, (req, res) => authorize.initiate_update(req, res));
+  app.post('/bill/save', ensureAuthenticated, (req, res) => authorize.save_update(req, res));
+  app.post('/bill/add', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
+  app.post('/bill/delete', ensureAuthenticated, (req, res) => authorize.delete_bill(req, res));
+
 
 }

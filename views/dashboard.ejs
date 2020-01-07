@@ -57,12 +57,12 @@
     </div>
   </div>
   <!-- Modal Expenses-->
-  <div class="modal fade" id="addExpense__trigger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="addExpense__trigger" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="text-danger">Deduct Expense <i class="fas fa-receipt"></i></h2>
+          <h2 class="text-danger">Expense <i class="fas fa-receipt"></i></h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -97,7 +97,7 @@
           <span>&times;</span>
         </button>
         <h2 class="text-center mb-3"><i class="fas fa-file-invoice-dollar"></i> Add Bill</h2>
-        <form action="/add-bill" method="POST">
+        <form action="/bill/add" method="POST">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control bill-input" placeholder="Enter Bill Name" required>
@@ -136,19 +136,19 @@
           <th scope="col">Make Payment</th>
         </tr>
       </thead>
-      <tbody class="monthly__expense-details">
+      <tbody>
         <% for (let bill of bills) { %>
           <tr>
-            <td class="monthly__expense-date"><%= formatDateDay(bill.date) %></td>
-            <td class="monthly__expense-name">
-              <form action="/update" method="post">
+            <td><%= formatDateDay(bill.date) %></td>
+            <td>
+              <form action="/bill/update" method="POST">
                 <input type="hidden" name="bill_id" value="<%= bill.id %>">
                 <button type="submit" class="btn btn-link">
                   <%= bill.name %>
                 </button>
               </form>
             </td>
-            <td class="monthly__expense-amount">$ <%= bill.amount.toFixed(2) %></td>
+            <td>$ <%= bill.amount.toFixed(2) %></td>
             <td>
               <form action="/transaction" method="POST">
                 <input type="hidden" name="amount" value="<%= bill.amount %>">
@@ -175,7 +175,7 @@
         <p class="transaction-title"><%= transactions[i].name %></p>
         <div class="transaction-info">
           <p class="transaction-date"><%= formatDate(transactions[i].date) %></p>
-          <p class="transaction-bank">$<%= transactions[i].bank %></p>
+          <p class="transaction-bank">$<%= transactions[i].bank.toFixed(2) %></p>
         </div>
       <% if(transactions[i].impact !== 'pos') { %>
         <p class="transaction-amount neg">-$ <%= transactions[i].amount.toFixed(2) %></p>

@@ -16,7 +16,6 @@
 
 <div class="container">
   <h1 class="text-center mb-3">History <i class="fas fa-history"></i></h1>
-
   <% if(transactions.length === 0){ %>
     <div class="container text-center">
       <img class="img-thumbnail" src="images/nothing_to_see.jpg">
@@ -27,18 +26,18 @@
       <p class="transaction-title"><%= trans.name %></p>
       <div class="transaction-info">
         <p class="transaction-date"><%= formatDate(trans.date) %></p>
-        <p class="transaction-bank">$<%= trans.bank %></p>
+        <p class="transaction-bank">$<%= trans.bank.toFixed(2) %></p>
       </div>
       <% if(trans.impact !== 'pos') { %>
         <p class="transaction-amount neg">-$ <%= trans.amount.toFixed(2) %></p>
       <% } else {%>
-        <p class="transaction-amount">$ <%= trans.amount.toFixed(2) %></p>
+        <p class="transaction-amount">
+          $ <%= trans.amount.toFixed(2) %>
+        </p>
       <% } %>
-      <a href=""><i class="fas fa-trash-alt"></i></a>
       <hr>
     <% } %>
   </div>
   <hr>
   <% } %>
-
 </div>

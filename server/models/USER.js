@@ -65,7 +65,7 @@ const UserSchema = new mongoose.Schema({
   bills: [BillSchema]
 }, {timestamps: true});
 
+mongoose.model('Transaction', TransactionSchema);
+mongoose.model('Bill', BillSchema);
 const User = mongoose.model('User', UserSchema);
-const Transaction = mongoose.model('Transaction', TransactionSchema);
-const Bill = mongoose.model('Bill', BillSchema);
 module.exports = User;
