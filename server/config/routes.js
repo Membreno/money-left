@@ -25,7 +25,7 @@ module.exports = function (app) {
   app.get('/history', ensureAuthenticated, (req, res) => authorize.history(req, res));
 
   // Settings
-  app.get('/settings', ensureAuthenticated, (req, res) => res.render('settings'));
+  app.get('/settings', ensureAuthenticated, (req, res) => base.settings(req, res));
 
   // Transactions
   app.post('/transaction', ensureAuthenticated, (req, res) => authorize.transaction(req, res));

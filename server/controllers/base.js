@@ -48,5 +48,16 @@ module.exports = { // We export so methods can be accessed in our routes
         transactions: user.transactions
       })
     })
+  },
+  settings: function (req, res) {
+    User.findOne({_id: req.session.user_id}, function (err, user){
+      if(!err){
+        let editUser = {
+          "name" : user.name,
+          "email": user.email
+        }
+        res.render('settings', editUser)
+      }
+    })
   }
 }
