@@ -73,14 +73,23 @@ module.exports = {
             const newUser = new User({
               name,
               email,
+              password
             });
-            // Save user
-            newUser.save()
-              .then(user => {
-                req.flash('success_msg', 'You are now registered and can log in');
-                res.redirect('/login');
-              })
-              .catch(err => console.log(err))
+
+            // Hash Password
+            bcrypt.genSalt(10, (err, salt) =>
+              bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if (err) throw err;
+                // Set password to hashed
+                newUser.password = hash;
+                // Save user
+                newUser.save()
+                  .then(user => {
+                    req.flash('success_msg', 'You are now registered and can log in');
+                    res.redirect('/login');
+                  })
+                  .catch(err => console.log(err))
+              }))
           }
         })
     }

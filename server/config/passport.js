@@ -14,7 +14,17 @@ module.exports = function(passport){
           if(!user){
             return done(null, false, { message: 'You could not be logged in' });
           }
-          return done(null, user)
+
+          // Match Password
+          bcrypt.compare(password, user.password, (err, isMatch) => {
+            if(err){ console.log(err)};
+
+            if(isMatch){
+              return done(null, user)
+            } else {
+              done(null, false, { message: 'You could not be logged in' })
+            }
+          });
         })
         .catch(err => console.log(err))
     })
