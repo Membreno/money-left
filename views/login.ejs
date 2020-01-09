@@ -9,18 +9,7 @@
   <link rel="stylesheet" href="../css/app.css">
 </head>
 <body>
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-light">
-    <a class="navbar-brand" href="#">MoneyLeft</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      </div>
-    </div>
-  </nav>
+  <%- include('./partials/basic_navbar.ejs'); %>
 
   <div class="container">
     <div class="row mt-5">
@@ -39,9 +28,10 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
           </form>
-          <p class="lead mt-4">
-            No Account? <a href="/register">Register</a>
-          </p>
+          <div class="login_footer">
+            <p class="lead mt-4 d-inline">No Account? <a href="/register">Register</a> </p>
+            <p class="lead mt-4 d-inline">Forgot Password? <a href="/reset">Reset</a> </p>
+          </div>
         </div>
       </div>
     </div>

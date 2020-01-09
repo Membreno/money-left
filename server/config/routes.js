@@ -37,5 +37,9 @@ module.exports = function (app) {
   app.post('/bill/add', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
   app.post('/bill/delete', ensureAuthenticated, (req, res) => authorize.delete_bill(req, res));
 
-
+  // Reset Password
+  app.get('/reset', (req, res) => base.forgot(req, res));
+  app.post('/reset', (req, res, next) => authorize.forgot(req, res, next));
+  app.get('/reset/:token', (req, res) => base.reset(req, res));
+  app.post('/reset/:token', (req, res) => authorize.reset(req, res));
 }

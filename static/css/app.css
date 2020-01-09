@@ -46,6 +46,10 @@
 .container {
   margin-top: 2rem; }
 
+.login_footer {
+  display: flex;
+  justify-content: space-between; }
+
 /* MODULES */
 .track-bar {
   width: 100%;

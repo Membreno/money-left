@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const TransactionSchema = new mongoose.Schema({
   amount: {
@@ -55,15 +56,21 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
   },
   bank: {
     type: Number,
     default: 0
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   transactions: [TransactionSchema],
   bills: [BillSchema]
 }, {timestamps: true});
+
+// // plugin for passport-local-mongoose
+// UserSchema.plugin(passportLocalMongoose);
 
 mongoose.model('Transaction', TransactionSchema);
 mongoose.model('Bill', BillSchema);
