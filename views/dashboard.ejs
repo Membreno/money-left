@@ -136,12 +136,8 @@
             </td>
             <td>$ <%= bill.amount.toFixed(2) %></td>
             <td>
-              <form action="/transaction" method="POST">
-                <input type="hidden" name="amount" value="<%= bill.amount %>">
-                <input type="hidden" name="impact" value="neg">
-                <input type="hidden" name="bank" value="<%= bank %>">
-                <input type="hidden" name="name" value="<%= bill.name %>">
-                <input type="hidden" name="date" value="<%= today %>">
+              <form action="/bill/pay" method="POST">
+                <input type="hidden" name="bill_id" value="<%= bill.id %>">
                 <button type="submit" class="btn btn-outline-success shadow">Pay</button>
               </form>
             </td>

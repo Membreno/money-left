@@ -36,6 +36,7 @@ module.exports = function (app) {
   app.post('/bill/save', ensureAuthenticated, (req, res) => authorize.save_update(req, res));
   app.post('/bill/add', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
   app.post('/bill/delete', ensureAuthenticated, (req, res) => authorize.delete_bill(req, res));
+  app.post('/bill/pay', ensureAuthenticated, (req, res) => authorize.pay_bill(req, res));
 
 
 }

@@ -160,7 +160,7 @@ module.exports = {
     })
   },
 
-  // BILLING METHOD
+  // BILLING METHODS
   add_bill: function(req, res){
     // Need to format date before saving for the correct date to show
     const date = moment(req.body.date).format('YYYY/MM/DD')
@@ -196,6 +196,43 @@ module.exports = {
     )
   },
 
+  pay_bill: (req, res) => {
+    console.log('Made it to PAY BILL')
+    User.findOne({_id: req.session.user_id}, function (err, user){
+      if(!err){
+        let bills = user.bills
+        let today = moment(new Date()).format('YYYY-MM-DD');
+        bills.forEach(bill =>{
+          if(bill.id === req.body.bill_id){
+            const userBank = Number(user.bank) - Number(bill.amount)
+            const transaction = new Transaction({
+              amount: bill.amount,
+              name: bill.name,
+              date: today,
+              impact: 'neg',
+              bank: userBank
+            })
+            transaction.save(
+              User.findOne({_id: req.session.user_id}, function(err, user){
+                user.transactions.push(transaction)
+                user.bank = userBank
+                user.save()
+                  .then(_ => {
+                    req.flash('success_msg', 'You successfully paid a bill')
+                    res.redirect('/dashboard')
+                  })
+                  .catch(err =>{
+                    console.log(err)
+                    res.redirect('/dashboard')
+                  })
+              })
+            )
+          }
+        })
+      }
+    })
+  },
+
   // UPDATE METHODS
   initiate_update: function (req, res) {
     req.session.bill_id = req.body.bill_id
@@ -207,18 +244,18 @@ module.exports = {
       res.redirect('/dashboard')
     } else {
       User.findOne({_id: req.session.user_id}, function (err, user){
-      if(!err){
-        let bills = user.bills
-        bills.forEach(bill =>{
-          if(bill.id === req.session.bill_id){
-            let billInfo = bill
-            let billDate = moment(bill.date).format('YYYY-MM-DD')
-            let today = moment(new Date()).format('YYYY-MM-DD');
-            res.render('update', {bill: billInfo, billDate, today})
-          }
-        })
-      }
-    })
+        if(!err){
+          let bills = user.bills
+          bills.forEach(bill =>{
+            if(bill.id === req.session.bill_id){
+              let billInfo = bill
+              let billDate = moment(bill.date).format('YYYY-MM-DD')
+              let today = moment(new Date()).format('YYYY-MM-DD');
+              res.render('update', {bill: billInfo, billDate, today})
+            }
+          })
+        }
+      })
     }
   },
 
