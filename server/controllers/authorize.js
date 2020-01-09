@@ -9,6 +9,7 @@ const moment = require('moment');
 const async = require('async');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   // USER METHODS
@@ -76,14 +77,21 @@ module.exports = {
             const newUser = new User({
               name,
               email,
+              password
             });
-            // Save user
-            newUser.save()
-              .then(user => {
-                req.flash('success_msg', 'You are now registered and can log in');
-                res.redirect('/login');
-              })
-              .catch(err => console.log(err))
+            // Hash Password
+            bcrypt.genSalt(10, (err, salt) =>
+              bcrypt.hash(newUser.password, salt, (err, hash) => {
+                // Set password to hashed
+                newUser.password = hash;
+                // Save user
+                newUser.save()
+                  .then(user => {
+                    req.flash('success_msg', 'You are now registered and can log in');
+                    res.redirect('/login');
+                  })
+                  .catch(err => console.log(err))
+              }))
           }
         })
     }
@@ -146,7 +154,7 @@ module.exports = {
         });
         var mailOptions = {
           to: user.email,
-          from: 'understandurtech@gmail.com',
+          from: 'MoneyLeft Project',
           subject: 'MoneyLeft Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -174,11 +182,26 @@ module.exports = {
             return res.redirect('/reset');
           }
           if(req.body.password === req.body.confirm) {
-            user.setPassword(req.body.password, function(err) {
-              user.resetPasswordToken = undefined;
-              user.resetPasswordExpires = undefined;
-              user.save();
-            })
+            // Hash Password
+            bcrypt.genSalt(10, (err, salt) =>
+              bcrypt.hash(req.body.password, salt, (err, hash) => {
+                // Set password to hashed
+                user.password = hash;
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpires = undefined;
+                // Save user
+                user.save()
+                  .then(user => {
+                    req.flash('success_msg', 'You are now registered and can log in');
+                    res.redirect('/login');
+                  })
+                  .catch(err => console.log(err))
+              }))
+            // user.setPassword(req.body.password, function(err) {
+            //   user.resetPasswordToken = undefined;
+            //   user.resetPasswordExpires = undefined;
+            //   user.save();
+            // })
           } else {
               req.flash("error", "Passwords do not match.");
               return res.redirect('/reset');
@@ -195,7 +218,7 @@ module.exports = {
         });
         var mailOptions = {
           to: user.email,
-          from: 'understandurtech@gmail.com',
+          from: 'MoneyLeft Project',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
