@@ -1,6 +1,62 @@
-<%- include('./partials/basic_nav.ejs') %>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="/">MoneyLeft</a>
+  <div class="home_buttons d-none d-xl-block">
+    <a class="btn btn-primary" href="/login">Log In</a>
+    <a class="btn btn-warning" href="/register">Sign Up</a>
+  </div>
+</nav>
 
 <div class="container">
-  <a class="btn btn-primary" href="/login">Log In</a>
-  <a class="btn btn-warning" href="/register">Sign Up</a>
+  <h1 class="text-center font-weight-bold">Take Control of Your Money</h1>
+  <p class="lead text-center text-secondary">Keep bills organized and track spending.</p>
+
+  <a href="/register" class="btn btn-outline-warning btn-block col-md-5 m-auto d-md-none">
+    Sign Up Free
+  </a>
+  <div class="" id="features">
+    <div class="card feature_card" style="width: 18rem;">
+      <img src="./images/sharon-mccutcheon--8a5eJ1-mmQ-unsplash.jpg" class="card-img-top" alt="organized billing">
+      <div class="feature_highlight"></div>
+      <div class="card-body">
+        <h5 class="card-title">Budgeting that works</h5>
+        <p class="card-text">See how you’re actually spending your money.</p>
+      </div>
+    </div>
+    <div class="card feature_card" style="width: 18rem;">
+      <img src="./images/paul-hanaoka-HbyYFFokvm0-unsplash.jpg" class="card-img-top" alt="organized billing">
+      <div class="feature_highlight"></div>
+      <div class="card-body">
+        <h5 class="card-title">Money on the go</h5>
+        <p class="card-text">Manage your money wherever you are.</p>
+      </div>
+    </div>
+    <div class="card feature_card" style="width: 18rem;">
+      <img src="./images/stil-Mw9KxYkqsnk-unsplash.jpg" class="card-img-top" alt="organized billing">
+      <div class="feature_highlight"></div>
+      <div class="card-body">
+        <h5 class="card-title">Spend with confidence</h5>
+        <p class="card-text">Keep your budgets in one place.</p>
+      </div>
+    </div>
+  </div>
+  <a href="/register" class="btn btn-warning col-md-5 mx-auto btn-block">
+    Sign Up Free
+  </a>
+  <a href="/login" class="btn btn-outline-primary col-md-5 mx-auto btn-block">
+    Sign In
+  </a>
+</div>
+<div id="socials_footer">
+  <a href="https://www.facebook.com" target="_blank">
+    <i class="fab fa-facebook-f fa-3x"></i>
+  </a>
+  <a href="https://www.github.com" target="_blank">
+    <i class="fab fa-github fa-3x"></i>
+  </a>
+  <a href="https://www.twitter.com" target="_blank">
+    <i class="fab fa-twitter fa-3x"></i>
+  </a>
+  <a href="https://www.instagram.com" target="_blank">
+    <i class="fab fa-instagram fa-3x"></i>
+  </a>
 </div>
