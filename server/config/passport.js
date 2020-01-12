@@ -10,13 +10,19 @@ module.exports = function(passport){
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match User
       User.findOne({ email: email })
-        .then(user => {
+        .then((err,user) => {
+          if(err){
+            return done(err)
+          }
           if(!user){
             return done(null, false, { message: 'You could not be logged in' });
           }
+          if(user.password != password){
+            return done(null, false, { message: 'You could not be logged in' })
+          }
           return done(null, user)
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log("In the CATCH", err))
     })
   );
 

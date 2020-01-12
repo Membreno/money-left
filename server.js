@@ -1,40 +1,39 @@
-const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
-const mongoose = require('mongoose');
-const flash = require('connect-flash');
-const session = require('express-session');
-const passport = require('passport');
+const express = require('express'),
+      expressLayouts = require('express-ejs-layouts'),
+      flash = require('connect-flash'),
+      session = require('express-session'),
+      mongoose = require('mongoose'),
+      passport = require('passport'),
+      bodyParser = require('body-parser'),
+      User = require('./server/models/USER'),
+      LocalStrategy = require('passport-local').Strategy,
+      passportLocalMongoose = require('passport-local-mongoose')
 
 const app = express();
 require('dotenv/config');
-
-// Passport config
-require('./server/config/passport')(passport);
-
 // EJS
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
-
 // EJS Static
 app.use(express.static(__dirname + '/static'));
-
-// Bodyparser
-app.use(express.urlencoded({ extended: false }));
-
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }));
 // Express Session
 app.use(session({
   secret: process.env.SECRET_SESSION,
   resave: false,
   saveUninitialized: false,
 }))
-
+// Connect Flash
+app.use(flash());
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Connect Flash
-app.use(flash());
-
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+}, User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 // Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
@@ -42,6 +41,12 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   next();
 })
+
+// Passport config
+// require('./server/config/passport')(passport);
+
+// Bodyparser
+// app.use(express.urlencoded({ extended: false }));
 
 // Routes & Mongoose config
 require('./server/config/mongoose.js');
