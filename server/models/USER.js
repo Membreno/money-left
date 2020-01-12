@@ -53,16 +53,11 @@ const BillSchema = new mongoose.Schema({
 });
 
 const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    // required: true,
-  },
+  name: String,
   email: {
     type: String,
     unique: true,
-    // required: true,
   },
-  // password: String,
   bank: {
     type: Number,
     default: 0

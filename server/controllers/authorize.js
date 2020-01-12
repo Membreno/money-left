@@ -14,111 +14,81 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   // USER METHODS
   register: (req, res) => {
-    console.log('INSIDE register POST route')
-    User.register(new User({
-      username: req.body.email,
-      name: req.body.name
-    }), req.body.password, function (err, user) {
-      console.log('INSIDE register user')
-      if (err) {
-        console.log('INSIDE error')
-        console.log(err);
-        return res.render('register');
-      }
-      passport.authenticate('local')(req, res, function () {
-        console.log('AUTHENTICATE')
-        res.redirect('/dashboard');
+    const {
+      name,
+      email,
+      password,
+      password2
+    } = req.body;
+    let errors = []
+
+    // Check required fields
+    if (!name || !email || !password || !password2) {
+      errors.push({
+        msg: 'Please fill in all fields'
       })
-    })
+    }
+    // Check passwords match
+    if (password !== password2) {
+      errors.push({
+        msg: 'Passwords do not match'
+      })
+    }
+    // Check password length
+    if (password.length < 6) {
+      errors.push({
+        msg: 'Password must be at least 6 characters'
+      })
+    }
+    // Check if email matches pattern
+    if (!EMAIL_REGEX.test(email)) {
+      errors.push({
+        msg: "Email must be valid"
+      });
+    }
 
-    // const {
-    //   name,
-    //   email,
-    //   password,
-    //   password2
-    // } = req.body;
-    // let errors = []
-
-    // // Check required fields
-    // if (!name || !email || !password || !password2) {
-    //   errors.push({
-    //     msg: 'Please fill in all fields'
-    //   })
-    // }
-    // // Check passwords match
-    // if (password !== password2) {
-    //   errors.push({
-    //     msg: 'Passwords do not match'
-    //   })
-    // }
-    // // Check password length
-    // if (password.length < 6) {
-    //   errors.push({
-    //     msg: 'Password must be at least 6 characters'
-    //   })
-    // }
-    // // Check if email matches pattern
-    // if (!EMAIL_REGEX.test(email)) {
-    //   errors.push({
-    //     msg: "Email must be valid"
-    //   });
-    // }
-
-    // if (errors.length > 0) {
-    //   res.render('register', {
-    //     errors,
-    //     name,
-    //     email,
-    //     password,
-    //     password2
-    //   })
-    // } else {
-    //   // Validation Passed
-    //   User.findOne({
-    //       email: email
-    //     })
-    //     .then(user => {
-    //       if (user) {
-    //         // User exits
-    //         errors.push({
-    //           msg: 'Email is already registered'
-    //         })
-    //         res.render('register', {
-    //           errors,
-    //           name,
-    //           email,
-    //           password,
-    //           password2
-    //         })
-    //       } else {
-    //         // const newUser = new User({
-    //         //   name,
-    //         //   email,
-    //         //   password
-    //         // });
-    //         // newUser.save()
-    //         //   .then(user => {
-    //         //     req.flash('success_msg', 'You are now registered and can log in');
-    //         //     res.redirect('/login');
-    //         //   })
-    //         //   .catch(err => console.log(err))
-
-    //         User.register(new User({ username: email}), password, function (err, user) {
-    //           if (err) {
-    //             console.log(err);
-    //             return res.redirect('/register');
-    //           }
-    //           user.save()
-    //           passport.authenticate('local')(req, res, function () {
-    //             req.flash('success_msg', 'You are now registered and can log in');
-    //             res.redirect('/login');
-    //           })
-    //         })
-
-    //       }
-    //     })
-    // }
-
+    if (errors.length > 0) {
+      res.render('register', {
+        errors,
+        name,
+        email,
+        password,
+        password2
+      })
+    } else {
+      // Validation Passed
+      User.findOne({ email: email})
+        .then(user => {
+          console.log(user)
+          if (user) {
+            console.log('user already registered!!!', email)
+            // User exits error
+            errors.push({ msg: 'Email is already registered'})
+            res.render('register',{
+              errors,
+              name,
+              email,
+              password,
+              password2
+            })
+          } else {
+            // Built in register method available with passport
+            User.register(new User({
+              username: req.body.email,
+              name: req.body.name
+            }), req.body.password, function (err, user) {
+              if (err) {
+                return res.render('register');
+              }
+              // User is authenticated with passport's local strategy
+              passport.authenticate('local')(req, res, function () {
+                req.flash('success_msg', 'You are now registered and can log in');
+                res.redirect('/dashboard');
+              })
+            }) // REGISTER ENDS
+          }
+        }) // .then() ENDS
+    }
   },
 
   login: (req, res, next) => {
