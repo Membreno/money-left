@@ -57,7 +57,9 @@ module.exports = {
       })
     } else {
       // Validation Passed
-      User.findOne({ email: email})
+      User.findOne({
+         username: email
+        })
         .then(user => {
           console.log(user)
           if (user) {
