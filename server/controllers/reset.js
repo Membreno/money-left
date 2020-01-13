@@ -15,7 +15,7 @@ module.exports = {
       },
       function (token, done) {
         User.findOne({
-          email: req.body.email
+          username: req.body.email
         }, function (err, user) {
           if (!user) {
             req.flash('error', 'No account with that email address exists.');
@@ -23,7 +23,7 @@ module.exports = {
           }
 
           user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 120000; // 1 hour
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
           user.save(function (err) {
             done(err, token, user);
@@ -31,6 +31,7 @@ module.exports = {
         });
       },
       function (token, user, done) {
+        console.log('RIGHT BEFORE SENDING EMAIL', user)
         var smtpTransport = nodemailer.createTransport({
           service: 'Gmail',
           auth: {
@@ -38,8 +39,9 @@ module.exports = {
             pass: process.env.GMAILPW
           }
         });
+        console.log('*************', user.email)
         var mailOptions = {
-          to: user.email,
+          to: user.username,
           from: 'MoneyLeft Project',
           subject: 'MoneyLeft Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
@@ -49,12 +51,14 @@ module.exports = {
         };
         smtpTransport.sendMail(mailOptions, function (err) {
           console.log('mail sent');
-          req.flash('success_msg', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+          req.flash('success_msg', 'An e-mail has been sent to ' + user.username + ' with further instructions.');
           done(err, 'done');
         });
       }
     ], function (err) {
-      if (err) return next(err);
+      if (err){
+        return next(err);
+      }
       res.redirect('/reset');
     });
   },
@@ -65,18 +69,24 @@ module.exports = {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
             req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/reset');
+            return res.redirect('back');
           }
           if(req.body.password === req.body.confirm) {
             // Hash Password
             user.setPassword(req.body.password, function(err) {
               user.resetPasswordToken = undefined;
               user.resetPasswordExpires = undefined;
-              user.save();
+              // user.save();
+              user.save(function (err) {
+                req.logIn(user, function (err) {
+                  done(err, user);
+                });
+              });
             })
           } else {
             req.flash("error", "Passwords do not match.");
-            return res.redirect('/reset');
+            // return res.redirect('/reset/:token');
+            return res.redirect('back');
           }
         });
       },
@@ -89,18 +99,21 @@ module.exports = {
           }
         });
         var mailOptions = {
-          to: user.email,
+          to: user.username,
           from: 'MoneyLeft Project',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
-            'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+            'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           req.flash('success_msg', 'Success! Your password has been changed.');
           done(err);
         });
       }
-    ], function(err) {
+    ], function (err) {
+      if (err){
+        return next(err);
+      }
       res.redirect('/dashboard');
     });
   },
