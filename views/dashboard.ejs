@@ -156,7 +156,7 @@
       <% for (let i = transactions.length - 1; i > transactions.length - 4; --i) { %>
         <p class="transaction-title"><%= transactions[i].name %></p>
         <div class="transaction-info">
-          <p class="transaction-date"><%= formatDate(transactions[i].date) %></p>
+          <p class="transaction-date"><%= formatDate(transactions[i].createdAt) %></p>
           <p class="transaction-bank">$<%= transactions[i].bank.toFixed(2) %></p>
         </div>
       <% if(transactions[i].impact !== 'pos') { %>

@@ -12,7 +12,7 @@
     <% for (let trans of transactions) { %>
       <p class="transaction-title"><%= trans.name %></p>
       <div class="transaction-info">
-        <p class="transaction-date"><%= formatDate(trans.date) %></p>
+        <p class="transaction-date"><%= formatDate(trans.createdAt) %></p>
         <p class="transaction-bank">$<%= trans.bank.toFixed(2) %></p>
       </div>
       <% if(trans.impact !== 'pos') { %>

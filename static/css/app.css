@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Signika:700&display=swap");
 /* PLUGINS */
 /* BASE STYLES */
 * {
@@ -16,10 +16,11 @@
 .require {
   color: #aa0000; }
 
-.title {
-  font-family: "Lakki Reddy", cursive;
+#bold_title {
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
   text-align: center;
-  color: #0075AA; }
+  color: #2C3E50; }
 
 .alert-warning {
   background: #F0AC4E; }
@@ -45,6 +46,10 @@
 /* LAYOUTS */
 .container {
   margin-top: 2rem; }
+
+.login_footer {
+  display: flex;
+  justify-content: space-between; }
 
 .home_buttons {
   width: 20%;

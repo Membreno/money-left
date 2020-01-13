@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      crypto = require('crypto'),
+      passportLocalMongoose = require('passport-local-mongoose');
 
 const TransactionSchema = new mongoose.Schema({
   amount: {
@@ -49,23 +51,37 @@ const BillSchema = new mongoose.Schema({
 });
 
 const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+  name: String,
   email: {
     type: String,
-    required: true,
+    // unique: true,
   },
   bank: {
     type: Number,
     default: 0
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   transactions: [TransactionSchema],
   bills: [BillSchema]
 }, {timestamps: true});
 
+UserSchema.pre('save', function(next) {
+  if(this.password){
+    this.salt = new Buffer(
+      crypto.randomBytes(16).toString('base64'),
+      'base64'
+    );
+    this.password = crypto.pbkdf2Sync(
+      password, this.salt, 10000, 64
+    ).toString('base64');
+  }
+  next();
+});
+
+// plugin for passport-local-mongoose
+UserSchema.plugin(passportLocalMongoose)
 mongoose.model('Transaction', TransactionSchema);
 mongoose.model('Bill', BillSchema);
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+
+module.exports = mongoose.model('User', UserSchema);

@@ -1,13 +1,12 @@
-const moment = require('moment');
-const mongoose = require('mongoose');
-const User = mongoose.model('User')
-
+const User = require('../models/USER'),
+      moment = require('moment');
 
 module.exports = { // We export so methods can be accessed in our routes
   home: (req, res) => {
     res.render('index')
   },
-  register: function (req, res) {
+
+  register: (req, res) => {
     if(!req.session.user_id){
       res.render('register')
     }
@@ -15,7 +14,8 @@ module.exports = { // We export so methods can be accessed in our routes
       res.redirect('/dashboard')
     }
   },
-  login: function (req, res) {
+
+  login: (req, res) => {
     if(!req.session.user_id){
       res.render('login')
     }
@@ -23,7 +23,8 @@ module.exports = { // We export so methods can be accessed in our routes
       res.redirect('/dashboard')
     }
   },
-  dashboard: function (req, res) {
+
+  dashboard: (req, res) => {
     req.session.user_id = req.user.id // POSSIBLY NOT NEEDED
     req.session.bill_id = null
     let today = moment(new Date()).format('YYYY-MM-DD');
@@ -49,7 +50,8 @@ module.exports = { // We export so methods can be accessed in our routes
       })
     })
   },
-  settings: function (req, res) {
+
+  settings: (req, res) => {
     User.findOne({_id: req.session.user_id}, function (err, user){
       if(!err){
         let editUser = {
@@ -59,5 +61,40 @@ module.exports = { // We export so methods can be accessed in our routes
         res.render('settings', editUser)
       }
     })
-  }
+  },
+
+  forgot: (req, res) => {
+    res.render('forgot')
+  },
+
+  reset: (req, res) => {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      if (!user) {
+        req.flash('error', 'Password reset token is invalid or has expired.');
+        return res.redirect('/reset');
+      }
+      res.render('reset', {token: req.params.token});
+    });
+  },
+
+  update: function(req, res){
+    if(!req.session.bill_id){
+      res.redirect('/dashboard')
+    } else {
+      User.findOne({_id: req.session.user_id}, function (err, user){
+        if(!err){
+          let bills = user.bills
+          bills.forEach(bill =>{
+            if(bill.id === req.session.bill_id){
+              let billInfo = bill
+              let billDate = moment(bill.date).format('YYYY-MM-DD')
+              let today = moment(new Date()).format('YYYY-MM-DD');
+              res.render('update', {bill: billInfo, billDate, today})
+            }
+          })
+        }
+      })
+    }
+  },
 }
+

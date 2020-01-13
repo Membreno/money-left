@@ -14,7 +14,9 @@
   "author": "Pedro M.",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.1.0",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
@@ -23,8 +25,10 @@
     "express-session": "^1.16.2",
     "moment": "^2.24.0",
     "mongoose": "^5.7.12",
+    "nodemailer": "^6.4.2",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
