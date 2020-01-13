@@ -2,7 +2,6 @@ const mongoose = require('mongoose'),
       crypto = require('crypto'),
       passportLocalMongoose = require('passport-local-mongoose');
 
-
 const TransactionSchema = new mongoose.Schema({
   amount: {
     type: Number,
