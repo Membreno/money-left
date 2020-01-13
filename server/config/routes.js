@@ -44,6 +44,7 @@ module.exports = function (app) {
   app.post('/bill/save', ensureAuthenticated, (req, res) => finance.save_update(req, res));
   app.post('/bill/add', ensureAuthenticated, (req, res) => finance.add_bill(req, res));
   app.post('/bill/delete', ensureAuthenticated, (req, res) => finance.delete_bill(req, res));
+  app.post('/bill/pay', ensureAuthenticated, (req, res) => finance.pay_bill(req, res));
 
   // Reset Password
   app.get('/reset', (req, res) => base.forgot(req, res));
