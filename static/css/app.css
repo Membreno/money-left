@@ -16,7 +16,7 @@
 .require {
   color: #aa0000; }
 
-#bold_title {
+.bold_title {
   font-family: "Signika", sans-serif;
   font-weight: bold;
   text-align: center;
