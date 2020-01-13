@@ -14,7 +14,8 @@ require('dotenv/config');
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
 // EJS Static
-app.use(express.static(__dirname + '/static'));
+app.use('/', express.static(__dirname + '/static'));
+app.use('/reset', express.static(__dirname + '/static'));
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
 // Express Session

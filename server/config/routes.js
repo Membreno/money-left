@@ -50,4 +50,7 @@ module.exports = function (app) {
   app.post('/reset', (req, res, next) => reset.forgot_password(req, res, next));
   app.get('/reset/:token', (req, res) => base.reset(req, res));
   app.post('/reset/:token', (req, res) => reset.reset_password(req, res));
+
+  // TEST ROUTE
+  app.get('/test/:num', (req, res) => res.render('testing'))
 }

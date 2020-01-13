@@ -1,7 +1,6 @@
 const mongoose = require('mongoose'),
       crypto = require('crypto'),
-      Schema = mongoose.Schema;
-const passportLocalMongoose = require('passport-local-mongoose');
+      passportLocalMongoose = require('passport-local-mongoose');
 
 
 const TransactionSchema = new mongoose.Schema({
@@ -56,7 +55,7 @@ const UserSchema = new mongoose.Schema({
   name: String,
   email: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   bank: {
     type: Number,

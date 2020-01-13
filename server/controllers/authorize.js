@@ -53,7 +53,7 @@ module.exports = {
          username: email
         })
         .then(user => {
-          console.log(user)
+          console.log("Checking if user registered ", user)
           if (user) {
             console.log('user already registered!!!', email)
             // User exits error
@@ -66,12 +66,14 @@ module.exports = {
               password2
             })
           } else {
+            console.log('IN FINAL ELSE FOR REGISTRATION')
             // Built in register method available with passport
             User.register(new User({
               username: req.body.email,
               name: req.body.name
             }), req.body.password, function (err, user) {
               if (err) {
+                console.log('THERES AN ERROR', err)
                 return res.render('register');
               }
               // User is authenticated with passport's local strategy
