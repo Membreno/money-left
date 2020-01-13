@@ -68,18 +68,18 @@ const UserSchema = new mongoose.Schema({
   bills: [BillSchema]
 }, {timestamps: true});
 
-// UserSchema.pre('save', function(next) {
-//   if(this.password){
-//     this.salt = new Buffer(
-//       crypto.randomBytes(16).toString('base64'),
-//       'base64'
-//     );
-//     this.password = crypto.pbkdf2Sync(
-//       password, this.salt, 10000, 64
-//     ).toString('base64');
-//   }
-//   next();
-// });
+UserSchema.pre('save', function(next) {
+  if(this.password){
+    this.salt = new Buffer(
+      crypto.randomBytes(16).toString('base64'),
+      'base64'
+    );
+    this.password = crypto.pbkdf2Sync(
+      password, this.salt, 10000, 64
+    ).toString('base64');
+  }
+  next();
+});
 
 // plugin for passport-local-mongoose
 UserSchema.plugin(passportLocalMongoose)

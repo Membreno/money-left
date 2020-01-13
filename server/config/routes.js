@@ -1,11 +1,9 @@
 const base = require('../controllers/base.js'); // Used to access the methods within controller
 const authorize = require('../controllers/authorize.js');
+const finance = require('../controllers/finance.js');
+const reset = require('../controllers/reset.js');
 const { ensureAuthenticated } = require('./auth');
 const passport = require('passport');
-const User = require('../models/USER');
-const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-
 
 module.exports = function (app) {
   // Welcome Page
@@ -27,36 +25,29 @@ module.exports = function (app) {
   app.get('/logout', (req, res) => authorize.logout(req, res));
 
   // Dashboard
-  app.get('/dashboard', isLoggedIn, function(req, res){base.dashboard(req, res)});
+  app.get('/dashboard', ensureAuthenticated, function(req, res){base.dashboard(req, res)});
 
   // History
-  app.get('/history', ensureAuthenticated, (req, res) => authorize.history(req, res));
+  app.get('/history', ensureAuthenticated, (req, res) => finance.history(req, res));
 
   // Settings
   app.get('/settings', ensureAuthenticated, (req, res) => base.settings(req, res));
 
   // Transactions
-  app.post('/transaction', ensureAuthenticated, (req, res) => authorize.transaction(req, res));
+  app.post('/transaction', ensureAuthenticated, (req, res) => finance.transaction(req, res));
+
+  // Update
+  app.get('/update', ensureAuthenticated, (req, res) => base.update(req, res));
 
   // Billing Handles
-  app.get('/update', ensureAuthenticated, (req, res) => authorize.update(req, res));
-  app.post('/bill/update', ensureAuthenticated, (req, res) => authorize.initiate_update(req, res));
-  app.post('/bill/save', ensureAuthenticated, (req, res) => authorize.save_update(req, res));
-  app.post('/bill/add', ensureAuthenticated, (req, res) => authorize.add_bill(req, res));
-  app.post('/bill/delete', ensureAuthenticated, (req, res) => authorize.delete_bill(req, res));
+  app.post('/bill/update', ensureAuthenticated, (req, res) => finance.initiate_update(req, res));
+  app.post('/bill/save', ensureAuthenticated, (req, res) => finance.save_update(req, res));
+  app.post('/bill/add', ensureAuthenticated, (req, res) => finance.add_bill(req, res));
+  app.post('/bill/delete', ensureAuthenticated, (req, res) => finance.delete_bill(req, res));
 
   // Reset Password
   app.get('/reset', (req, res) => base.forgot(req, res));
-  app.post('/reset', (req, res, next) => authorize.forgot(req, res, next));
+  app.post('/reset', (req, res, next) => reset.forgot_password(req, res, next));
   app.get('/reset/:token', (req, res) => base.reset(req, res));
-  app.post('/reset/:token', (req, res) => authorize.reset(req, res));
-
-  // Check if user logged in
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    req.flash('error_msg', 'You must be logged in to view this resource');
-    res.redirect('/login');
-  }
+  app.post('/reset/:token', (req, res) => reset.reset_password(req, res));
 }

@@ -2,15 +2,14 @@ const express = require('express'),
       expressLayouts = require('express-ejs-layouts'),
       flash = require('connect-flash'),
       session = require('express-session'),
-      mongoose = require('mongoose'),
       passport = require('passport'),
       bodyParser = require('body-parser'),
       User = require('./server/models/USER'),
-      LocalStrategy = require('passport-local').Strategy,
-      passportLocalMongoose = require('passport-local-mongoose')
+      LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
 require('dotenv/config');
+
 // EJS
 app.use(expressLayouts)
 app.set('view engine', 'ejs');
@@ -26,6 +25,7 @@ app.use(session({
 }))
 // Connect Flash
 app.use(flash());
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -34,6 +34,7 @@ passport.use(new LocalStrategy({
 }, User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 // Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
@@ -41,12 +42,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   next();
 })
-
-// Passport config
-// require('./server/config/passport')(passport);
-
-// Bodyparser
-// app.use(express.urlencoded({ extended: false }));
 
 // Routes & Mongoose config
 require('./server/config/mongoose.js');
