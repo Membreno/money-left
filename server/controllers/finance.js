@@ -100,6 +100,47 @@ module.exports = {
     )
   },
 
+  pay_bill: (req, res) => {
+    console.log('Made it to PAY BILL')
+    User.findOne({
+      _id: req.session.user_id
+    }, function (err, user) {
+      if (!err) {
+        let bills = user.bills
+        let today = moment(new Date()).format('YYYY-MM-DD');
+        bills.forEach(bill => {
+          if (bill.id === req.body.bill_id) {
+            const userBank = Number(user.bank) - Number(bill.amount)
+            const transaction = new Transaction({
+              amount: bill.amount,
+              name: bill.name,
+              date: today,
+              impact: 'neg',
+              bank: userBank
+            })
+            transaction.save(
+              User.findOne({
+                _id: req.session.user_id
+              }, function (err, user) {
+                user.transactions.push(transaction)
+                user.bank = userBank
+                user.save()
+                  .then(_ => {
+                    req.flash('success_msg', 'You successfully paid a bill')
+                    res.redirect('/dashboard')
+                  })
+                  .catch(err => {
+                    console.log(err)
+                    res.redirect('/dashboard')
+                  })
+              })
+            )
+          }
+        })
+      }
+    })
+  },
+
   // UPDATE METHODS
   initiate_update: function (req, res) {
     req.session.bill_id = req.body.bill_id

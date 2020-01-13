@@ -31,7 +31,6 @@ module.exports = {
         });
       },
       function (token, user, done) {
-        console.log('RIGHT BEFORE SENDING EMAIL', user)
         var smtpTransport = nodemailer.createTransport({
           service: 'Gmail',
           auth: {
