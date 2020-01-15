@@ -34,6 +34,9 @@
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.1"
   },
+  "engines": {
+    "node": "10.16.0"
+  },
   "bugs": {
     "url": "https://github.com/Membreno/money-left/issues"
   },
