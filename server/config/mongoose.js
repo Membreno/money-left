@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Connect to Mongo...
 // Set the option for autoIndex to false to prevent duplicate key error
-mongoose.connect(process.env.MONGOURI, {
+mongoose.connect(process.env.MONGOURA, {
    useUnifiedTopology: true,
    useNewUrlParser: true,
    useCreateIndex: true,
