@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "core-util-is": "^1.0.2",
     "dotenv": "^8.2.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
@@ -36,7 +37,7 @@
     "nodemon": "^2.0.1"
   },
   "engines": {
-    "node": "10.16.0"
+    "node": "10.x"
   },
   "bugs": {
     "url": "https://github.com/Membreno/money-left/issues"
