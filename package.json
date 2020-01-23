@@ -1,6 +1,6 @@
 {
   "name": "money_left",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Budgeting tool",
   "main": "server.js",
   "scripts": {
