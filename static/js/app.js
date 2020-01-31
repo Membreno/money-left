@@ -1,3 +1,4 @@
+const openModalTrigger = document.querySelector(".empty-trigger");
 const openModalTriggerEl = document.querySelector(".trigger");
 const closeModalEl = document.querySelector(".close-exit");
 const closeModal = document.querySelector(".close-exit-button");
@@ -9,6 +10,9 @@ if (openModalTriggerEl) {
 }
 function addBillDisplay() {
   openModalTriggerEl.addEventListener("click", function () {
+    modalEl.classList.add("open");
+  });
+  openModalTrigger.addEventListener("click", function () {
     modalEl.classList.add("open");
   });
   closeModalEl.addEventListener("click", function () {
