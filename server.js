@@ -8,7 +8,7 @@ const express = require('express'),
       LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
-// require('dotenv/config');
+require('dotenv/config');
 
 // EJS
 app.use(expressLayouts)
