@@ -12,9 +12,11 @@ function addBillDisplay() {
   openModalTriggerEl.addEventListener("click", function () {
     modalEl.classList.add("open");
   });
-  openModalTrigger.addEventListener("click", function () {
-    modalEl.classList.add("open");
-  });
+  if(openModalTrigger){
+    openModalTrigger.addEventListener("click", function () {
+      modalEl.classList.add("open");
+    });
+  }
   closeModalEl.addEventListener("click", function () {
     modalEl.classList.remove("open");
     billInputs.forEach(elem => elem.value = '');
