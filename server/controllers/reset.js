@@ -1,10 +1,7 @@
 const User = require('../models/USER'),
       async = require('async'),
-      nodemailer = require('nodemailer'),
+      sgMail = require('@sendgrid/mail'),
       crypto = require('crypto');
-
-const sgMail = require('@sendgrid/mail');
-
 
 module.exports = {
   // RESET PASSWORD
@@ -37,7 +34,10 @@ module.exports = {
         console.log('************* User Email:', user.username)
         var msg = {
           to: user.username,
-          from: 'moneyleftproject@gmail.com',
+          from: {
+            email: 'moneyleftproject@gmail.com',
+            name: 'MoneyLeft Project'
+          },
           subject: 'MoneyLeft Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -72,7 +72,6 @@ module.exports = {
             user.setPassword(req.body.password, function(err) {
               user.resetPasswordToken = undefined;
               user.resetPasswordExpires = undefined;
-              // user.save();
               user.save(function (err) {
                 req.logIn(user, function (err) {
                   done(err, user);
@@ -81,27 +80,24 @@ module.exports = {
             })
           } else {
             req.flash("error", "Passwords do not match.");
-            // return res.redirect('/reset/:token');
             return res.redirect('back');
           }
         });
       },
       function(user, done) {
-        var smtpTransport = nodemailer.createTransport({
-          service: 'Gmail',
-          auth: {
-            user: 'understandurtech@gmail.com',
-            pass: process.env.GMAILPW
-          }
-        });
-        var mailOptions = {
+        var msg = {
           to: user.username,
-          from: 'MoneyLeft Project',
+          from: {
+            email: 'moneyleftproject@gmail.com',
+            name: 'MoneyLeft Project'
+          },
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
         };
-        smtpTransport.sendMail(mailOptions, function(err) {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        sgMail.send(msg, function (err) {
+          console.log('mail sent');
           req.flash('success_msg', 'Success! Your password has been changed.');
           done(err);
         });
