@@ -5,4 +5,5 @@ views/basic-navbar.ejs
 views/navbar.ejs
 static/js/modules/addBillModal.js
 static/js/modules/getRecentTransactions.js
-now.json
+now.jsonsendgrid.env
+sendgrid.env
