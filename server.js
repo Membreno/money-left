@@ -10,7 +10,7 @@ const express = require('express'),
 const app = express();
 
 // Requirement For Local Environment
-require('dotenv/config');
+// require('dotenv/config');
 
 // EJS
 app.use(expressLayouts)
