@@ -7,3 +7,4 @@ static/js/modules/addBillModal.js
 static/js/modules/getRecentTransactions.js
 now.jsonsendgrid.env
 sendgrid.env
+.sass-cache

@@ -2,7 +2,11 @@
 
 <div class="container">
   <div class="total-funds">
-    <h3 id="total-funds__amount" class="total-funds__amount">$<%= bank.toFixed(2) %></h3>
+    <% if(bank < 0){ %>
+      <h3 class="total-funds__amount">$ <span class="text-danger"><%= bank.toFixed(2) %></span></h3>
+    <% } else { %>
+      <h3 class="total-funds__amount">$<%= bank.toFixed(2) %></h3>
+    <% } %>
   </div>
   <div class="modify-funds">
     <button class="btn btn-success shadow border border-dark" data-toggle="modal"
